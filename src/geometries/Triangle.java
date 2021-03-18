@@ -7,6 +7,10 @@ public class Triangle extends Polygon {
         super(a,b,c);
     }
 
+    public  Vector getNormal(Point3D p){
+        return null;
+    }
+
 
 
 

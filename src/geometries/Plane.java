@@ -2,25 +2,27 @@ package geometries;
 import primitives.*;
 
 public class Plane implements  Geometry{
-    private  Point3D q0;
-    private Vector normal;
+    private  Point3D _q0;
+    private Vector _normal;
 
     public Plane(Point3D a,Point3D b,Point3D c)
     {
         Vector v1 = a.subtract(b);
+        Vector v2 = b.subtract(c);
+        Vector v3 = v1.crossProduct(v2);
 
-        q0 = a;
-        normal = null;
+        _q0 = a;
+        _normal = v3.normalize();
     }
 
-    public Plane(Point3D a,Vector d)
+    public Plane(Point3D a,Vector v)
     {
-        normal = d;
-        q0 = a;
+        _normal = v.normalize();
+        _q0 = a;
     }
 
     public Vector getNormal(Point3D s){
-        return null;
+        return _normal;
     }
 
 }
