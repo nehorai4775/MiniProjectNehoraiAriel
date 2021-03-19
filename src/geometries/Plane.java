@@ -1,6 +1,8 @@
 package geometries;
 import primitives.*;
 
+import java.util.Objects;
+
 public class Plane implements  Geometry{
     private  Point3D _q0;
     private Vector _normal;
@@ -25,4 +27,23 @@ public class Plane implements  Geometry{
         return _normal;
     }
 
+    public Point3D getQ0() {
+        return _q0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plane plane = (Plane) o;
+        return _q0.equals(plane._q0) && _normal.equals(plane._normal);
+    }
+
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "_q0=" + _q0 +
+                ", _normal=" + _normal +
+                '}';
+    }
 }
