@@ -15,6 +15,10 @@ public class Vector {
 
         head=_head;
     }
+    public Vector(double x, double y, double z) {
+        this(new Point3D(x, y, z));
+    }
+
     public Vector add(Vector v0) {
         Vector addVector=new Vector(new Point3D(head._x._coord+v0.head._x._coord,head._y._coord+v0.head._y._coord,head._z._coord+v0.head._z._coord));
         return addVector;
