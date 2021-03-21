@@ -5,16 +5,16 @@ import java.util.Objects;
 
 public class Cylinder extends Tube{
     double _height;
-
+// a constructor
     public Cylinder(double height,Ray axisRay,double radius) {
         super(axisRay,radius);
         _height = height;
     }
-
+    //a function that returns the normal
     public  Vector getNormal(Point3D p){
         return null;
     }
-
+//a function that returns the _height
     public double getHeight() {
         return _height;
     }

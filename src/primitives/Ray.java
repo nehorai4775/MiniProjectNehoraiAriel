@@ -13,7 +13,7 @@ public class Ray {
     }
 
 
-
+// a constructor
     public Ray(Point3D p0, Vector dir) {
         this.p0 = p0;
         dir.normalize();

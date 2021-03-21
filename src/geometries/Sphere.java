@@ -6,12 +6,14 @@ import java.util.Objects;
 public class Sphere implements Geometry{
     private Point3D _center;
     private double _radius;
-
+// a constructor
     public Sphere(Point3D center,double radius){
         _center = center;
         _radius = radius;
     }
+    //a function that returns the normal
     public Vector getNormal(Point3D p){
+
         return null;
     }
 
@@ -24,6 +26,7 @@ public class Sphere implements Geometry{
     }
 
     public Point3D getCenter() {
+
         return _center;
     }
 
