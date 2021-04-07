@@ -1,4 +1,4 @@
-/*
+package program;/*
 Nehorai Cohen 325356814
 Ariel Benshushan 325455426
 Nehorai4775@gmail.com

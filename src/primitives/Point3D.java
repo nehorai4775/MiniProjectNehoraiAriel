@@ -37,10 +37,10 @@ public class Point3D {
     }
     //a function that returns the distance between two points squared
     public double distancrSquared(Point3D p2) {
-        double x=p2._x._coord- _x._coord;
-        double y=p2._y._coord- _y._coord;
-        double z=p2._z._coord- _z._coord;
-        return (x+x+y+y+z+z);
+        double x=( p2._x._coord- _x._coord)*( p2._x._coord- _x._coord);
+        double y=(p2._y._coord- _y._coord)*(p2._y._coord- _y._coord);
+        double z=(p2._z._coord- _z._coord)*(p2._z._coord- _z._coord);
+        return (x+y+z);
     }
     //a function that returns the distance between two points
     public double distancr(Point3D p2) {
