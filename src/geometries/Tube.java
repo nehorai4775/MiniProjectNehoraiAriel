@@ -9,6 +9,8 @@ public class Tube implements Geometry{
 // a constructor
     public Tube(Ray axisRay,double radius){
         _axisRay = axisRay;
+        if(radius==0)
+            throw new IllegalArgumentException();
         _radius = radius;
     }
     //a function that returns the normal

@@ -17,7 +17,9 @@ public class Plane implements  Geometry{
 
         Vector v1 = a.subtract(b);
         Vector v2 = b.subtract(c);
-        Vector v3 = v1.crossProduct(v2);
+
+            Vector v3 = v1.crossProduct(v2);
+
 
         _q0 = a;
         _normal = v3.normalize();

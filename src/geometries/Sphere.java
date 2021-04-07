@@ -8,7 +8,10 @@ public class Sphere implements Geometry{
     private double _radius;
 // a constructor
     public Sphere(Point3D center,double radius){
+
         _center = center;
+        if(radius==0)
+            throw new IllegalArgumentException();
         _radius = radius;
     }
     //a function that returns the normal
