@@ -7,8 +7,9 @@ public class Triangle extends Polygon {
         super(a,b,c);
     }
     //a function that returns the normal
-    public  Vector getNormal(Point3D p){
-        return null;
+    public  Vector getNormal(Point3D p) {
+
+        return super.getNormal(p);
     }
 
     @Override

@@ -1,5 +1,11 @@
 package primitives;
+/*
+Nehorai Cohen 325356814
+Ariel Benshushan 325455426
+Nehorai4775@gmail.com
+benshoshan60@gmail.com
 
+* */
 import org.junit.jupiter.api.Test;
 
 import static java.lang.System.out;

@@ -12,8 +12,15 @@ public class Ray {
         return p0.equals(ray.p0) && dir.equals(ray.dir);
     }
 
+    public Point3D getP0() {
+        return p0;
+    }
 
-// a constructor
+    public Vector getDir() {
+        return dir;
+    }
+
+    // a constructor
     public Ray(Point3D p0, Vector dir) {
         this.p0 = p0;
         dir.normalize();
