@@ -2,6 +2,9 @@ package geometries;
 import primitives.*;
 
 import java.util.Objects;
+
+import static primitives.Util.isZero;
+
 //Plane class
 public class Plane implements  Geometry{
     private  Point3D _q0;
@@ -10,12 +13,15 @@ public class Plane implements  Geometry{
     //a contractor that gets three Point3Ds as parameters
     public Plane(Point3D a,Point3D b,Point3D c)
     {
+
+
         Vector v1 = a.subtract(b);
         Vector v2 = b.subtract(c);
         Vector v3 = v1.crossProduct(v2);
 
         _q0 = a;
         _normal = v3.normalize();
+
     }
 //a constructor that gets a vector and a point as parameters
     public Plane(Point3D a,Vector v)
