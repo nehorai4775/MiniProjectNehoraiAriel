@@ -18,6 +18,7 @@ class SphereTest {
     public void testConstructor() {
         // ============ Equivalence Partitions Tests ==============
         try {
+            //constructing a correct Sphere
             new Sphere(new Point3D(1,2,3),5);
 
         }
@@ -26,6 +27,7 @@ class SphereTest {
         }
         // =============== Boundary Values Tests ==================
         try {
+            // when the radius is zero
             new Sphere(new Point3D(1,2,3),0);
             fail("Failed constructing when the radius is zero");
         }
@@ -37,6 +39,7 @@ class SphereTest {
     @Test
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
+        //test the get normal
        Sphere sp= new Sphere(new Point3D(0,1,2),5);
         double sqrt3 = Math.sqrt(1d / 3);
 

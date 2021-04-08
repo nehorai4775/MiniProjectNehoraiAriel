@@ -15,6 +15,7 @@ public class Tube implements Geometry{
     }
     //a function that returns the normal
     public Vector getNormal(Point3D p){
+//according to what that be displayed
 
         double t =_axisRay.getDir().dotProduct(p.subtract(_axisRay.getP0()));
         Point3D o=_axisRay.getP0().add( _axisRay.getDir().scale(t));

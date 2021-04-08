@@ -12,7 +12,7 @@ public class Cylinder extends Tube{
     }
     //a function that returns the normal
     public  Vector getNormal(Point3D p){
-
+//according to what that be displayed
         return super.getAxisRay().getDir();
     }
 //a function that returns the _height

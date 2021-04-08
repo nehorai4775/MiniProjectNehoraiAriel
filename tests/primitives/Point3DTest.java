@@ -12,7 +12,7 @@ import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Point3DTest {
-
+//we test the function of point3D
     @Test
     void testDistancrSquared() {
         // ============ Equivalence Partitions Tests ==============

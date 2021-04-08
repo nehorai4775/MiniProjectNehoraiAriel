@@ -16,7 +16,9 @@ public class Sphere implements Geometry{
     }
     //a function that returns the normal
     public Vector getNormal(Point3D p){
-       Vector v1=p.subtract(_center);
+        //according to what that be displayed
+
+        Vector v1=p.subtract(_center);
         return v1.normalize();
     }
 

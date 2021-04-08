@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static primitives.Util.isZero;
 
 class VectorTest {
-
+//we test the function of vector
     @Test
     void testAdd() {
 // ============ Equivalence Partitions Tests ==============

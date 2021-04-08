@@ -18,6 +18,7 @@ class CylinderTest {
     public void testConstructor() {
         // ============ Equivalence Partitions Tests ==============
         try {
+            //constructing a correct Cylinder
             new Cylinder( 8,new Ray(new Point3D(1,2,3),new Vector(3,2,4)),4);
 
         }
@@ -26,6 +27,7 @@ class CylinderTest {
         }
         // =============== Boundary Values Tests ==================
         try {
+            //  when the vector is the vector zero
             new Cylinder( 8,new Ray(new Point3D(1,2,3),new Vector(0,0,0)),4);
             fail("Failed constructing when the vector is the vector zero");
 
@@ -37,6 +39,7 @@ class CylinderTest {
     @Test
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
+        // test the get normal
         Cylinder cy = new Cylinder(5,new Ray(new Point3D(1,1,2),new Vector(1,1,1)),5);
         double sqrt3 = Math.sqrt(1d / 3);
         assertEquals( new Vector(sqrt3, sqrt3, sqrt3), cy.getNormal(new Point3D(0, 0, 1)),"Bad normal to Cylinder");
