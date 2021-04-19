@@ -1,6 +1,8 @@
 package geometries;
 import primitives.*;
 
+import java.util.List;
+
 public class Triangle extends Polygon {
 //a contractor that gets three Point3Ds as parameters And uses the father's contractor
     public Triangle(Point3D a,Point3D b,Point3D c){
@@ -20,4 +22,5 @@ public class Triangle extends Polygon {
                 ", plane=" + plane +
                 '}';
     }
+
 }
