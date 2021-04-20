@@ -40,9 +40,8 @@ List<Point3D> pointIntersection=super.plane.findIntersections(ray);
     Vector n3 = (v3.crossProduct(v1)).normalize();
     if (((ray.getDir().dotProduct(n1))>0&& (ray.getDir().dotProduct(n2)>0 && (ray.getDir().dotProduct(n3))>0)||(ray.getDir().dotProduct(n1))<0&& (ray.getDir().dotProduct(n2)<0 && (ray.getDir().dotProduct(n3))<0)))
         return pointIntersection;
-
-else
-                return null;
+    else
+        return null;
 
         }
     }

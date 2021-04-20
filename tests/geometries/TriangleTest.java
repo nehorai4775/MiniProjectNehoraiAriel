@@ -71,11 +71,21 @@ class TriangleTest {
         assertEquals(List.of(p1), result,"ray intersection the triangle inside");
 
         //ray intersection the triangle outside
+        assertNull(t1.findIntersections(new Ray(new Point3D(2, 1, -1), new Vector(0, 0, 1))),"ray intersection the triangle outside");
+
         //ray intersection the trinagle between the two segment
+        assertNull(t1.findIntersections(new Ray(new Point3D(2, -1, -1), new Vector(0, 0, 1))),"ray intersection the triangle outside");
+
         // =============== Boundary Values Tests ==================
 
         //ray intersection the trinagle in the ray of his segment
+        assertNull(t1.findIntersections(new Ray(new Point3D(2, 0, -1), new Vector(0, 0, 1))),"ray intersection the triangle outside");
+
         //ray intersection the triangle in his segment
+        assertNull(t1.findIntersections(new Ray(new Point3D(0, 0, -1), new Vector(0, 0, 1))),"ray intersection the triangle outside");
+
         // ray intersection the triangle in his vertex
+        assertNull(t1.findIntersections(new Ray(new Point3D(1, 0, -1), new Vector(0, 0, 1))),"ray intersection the triangle outside");
+
     }
 }
