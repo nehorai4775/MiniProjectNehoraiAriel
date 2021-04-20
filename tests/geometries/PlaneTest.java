@@ -11,6 +11,7 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -60,6 +61,39 @@ class PlaneTest {
     @Test
     void testfindIntersections()
     {
+        //EP
+        Plane p =new Plane(new Point3D(1,0,0),new Point3D(0,1,0),new Point3D(0,0,0));
+        //Ray intersects the plane
+        List<Point3D> result = p.findIntersections(new Ray(new Point3D(0.9,0.9,-1),new Vector(0,0,1)));
+        Point3D p1=new Point3D(0.9,0.9,0);
+        assertEquals( 1, result.size(),"Wrong number of points");
+        assertEquals(List.of(p1), result,"Ray intersects the plane");
+        //Ray doesn't intersect the plane
+        assertNull(p.findIntersections(new Ray(new Point3D(3, 0, 0), new Vector(0, 0, -1))),"Ray doesn't intersect the plane");
+
+        //BVA
+        //Ray is parallel to the plane
+        assertNull(p.findIntersections(new Ray(new Point3D(3, 0, 1), new Vector(1, 0, 0))),"the ray is in not included in the plane");
+//– the ray is not included in the plane
+        assertNull(p.findIntersections(new Ray(new Point3D(3, 0, 0), new Vector(1, 0, 0))),"the ray is  included in the plane");
+
+        //Ray is orthogonal to the plane
+        assertNull(p.findIntersections(new Ray(new Point3D(3, 0, 1), new Vector(0, 0, 1))),"the ray after");
+        assertNull(p.findIntersections(new Ray(new Point3D(3, 0, 0), new Vector(0, 0, 1))),"the ray in");
+
+
+        Point3D Point= new Point3D(3,0,0);
+        List<Point3D> r=p.findIntersections(new Ray(new Point3D(3, 0, -1), new Vector(0, 0, 1)));
+        assertEquals(List.of(Point),r,"the before");
+
+
+
+        //Ray is neither orthogonal nor parallel to and begins at the plane
+        assertNull(p.findIntersections(new Ray(new Point3D(1, 1, 0), new Vector(0, -1, 1))),"Ray is orthogonal nor parallel to and begins at the plane");
+
+
+
+
 
     }
 }
