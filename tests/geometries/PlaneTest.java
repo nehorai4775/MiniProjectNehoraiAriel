@@ -62,7 +62,7 @@ class PlaneTest {
     void testfindIntersections()
     {
         //EP
-        Plane p =new Plane(new Point3D(1,0,0),new Point3D(0,1,0),new Point3D(0,0,0));
+        Plane p =new Plane(new Point3D(1,0,0),new Point3D(0,1,0),new Point3D(0,2,0));
         //Ray intersects the plane
         List<Point3D> result = p.findIntersections(new Ray(new Point3D(0.9,0.9,-1),new Vector(0,0,1)));
         Point3D p1=new Point3D(0.9,0.9,0);
@@ -82,15 +82,17 @@ class PlaneTest {
         assertNull(p.findIntersections(new Ray(new Point3D(3, 0, 0), new Vector(0, 0, 1))),"the ray in");
 
 
-        Point3D Point= new Point3D(3,0,0);
-        List<Point3D> r=p.findIntersections(new Ray(new Point3D(3, 0, -1), new Vector(0, 0, 1)));
-        assertEquals(List.of(Point),r,"the before");
-
+         p1= new Point3D(3,0,0);
+         result=p.findIntersections(new Ray(new Point3D(3, 0, -1), new Vector(0, 0, 1)));
+        assertEquals( 1, result.size(),"Wrong number of points");
+        assertEquals(List.of(p1), result,"the ray is before");
 
 
         //Ray is neither orthogonal nor parallel to and begins at the plane
         assertNull(p.findIntersections(new Ray(new Point3D(1, 1, 0), new Vector(0, -1, 1))),"Ray is orthogonal nor parallel to and begins at the plane");
 
+        //Ray is neither orthogonal nor parallel to and begins in the same point which appears as reference point in the plane (Q)
+        assertNull(p.findIntersections(new Ray(new Point3D(1, 0, 0), new Vector(0, -1, 1))),"        //Ray is neither orthogonal nor parallel to and begins in the same point which appears as reference point in the plane (Q)");
 
 
 

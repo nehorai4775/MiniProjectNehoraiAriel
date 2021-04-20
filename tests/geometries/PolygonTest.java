@@ -7,6 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import geometries.*;
 import primitives.*;
+
+import java.util.List;
+
 /**
  * Testing Polygons
  *
@@ -88,4 +91,33 @@ class PolygonTest {
         double sqrt3 = Math.sqrt(1d / 3);
         assertEquals( new Vector(sqrt3, sqrt3, sqrt3), pl.getNormal(new Point3D(0, 0, 1)),"Bad normal to trinagle");
     }
+    @Test
+    void testfindIntersections(){
+        // ============ Equivalence Partitions Tests ==============
+        //ray intersection the polygon inside
+        Polygon pl = new Polygon(new Point3D(1, 0, 0), new Point3D(0, 1, 0), new Point3D(-1, 0, 0),
+                new Point3D(0, -1, 0));
+        Point3D p1=new Point3D(0,0.5,0);
+        List<Point3D> result = pl.findIntersections(new Ray(new Point3D(0,0.5,-1),new Vector(0,0,1)));
+        assertEquals( 1, result.size(),"Wrong number of points");
+        assertEquals(List.of(p1), result,"ray intersection the Polygone inside");
+
+        //ray intersection the Polygon outside
+        assertNull(pl.findIntersections(new Ray(new Point3D(1, 1, -1), new Vector(0, 0, 1))),"ray intersection the triangle outside");
+
+        //ray intersection the Polygon between the two segment
+        assertNull(pl.findIntersections(new Ray(new Point3D(2, 0, -1), new Vector(0, 0, 1))),"ray intersection the Polygon between the two segment");
+// =============== Boundary Values Tests ==================
+
+        //ray intersection the Polygon in the ray of his segment
+        assertNull(pl.findIntersections(new Ray(new Point3D(2, -1, -1), new Vector(0, 0, 1))),"ray intersection the Polygon in the ray of his segment");
+
+        //ray intersection the Polygon in his segment
+        assertNull(pl.findIntersections(new Ray(new Point3D(0.5, 0.5, -1), new Vector(0, 0, 1))),"ray intersection the Polygon in his segment");
+
+        // ray intersection the Polygon in his vertex
+        assertNull(pl.findIntersections(new Ray(new Point3D(1, 0, -1), new Vector(0, 0, 1))),"ray intersection the Polygon in his vertex");
+
+    }
 }
+
