@@ -1,4 +1,5 @@
 package geometries;
+import primitives.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,10 +10,20 @@ public class Geometries {
 
 
     Geometries(Intersectable... geometries){
+
         _list = new ArrayList<Intersectable>(Arrays.asList(geometries));
     }
 
     Geometries(){
+
         _list = new ArrayList<Intersectable>(Arrays.asList());
     }
+    public void add(Intersectable geometries)
+    {
+        _list.add(geometries);
+    }
+    List<Point3D> findIntsersections(Ray ray){
+        return null;
+    }
+
 }
