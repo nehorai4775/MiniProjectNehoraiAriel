@@ -73,13 +73,13 @@ public class Plane implements  Geometry{
                 List<Point3D> points=new ArrayList<Point3D>();
                 Point3D temp=ray.getP0().add(ray.getDir().scale(t));
                 points.add(temp);
+                return points;
             }
             else
                 return null;
         }
         else
             return null;
-        return null;
     }
 
 
