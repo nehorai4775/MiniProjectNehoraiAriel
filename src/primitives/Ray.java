@@ -26,4 +26,13 @@ public class Ray {
         dir.normalize();
         this.dir = dir;
     }
+    public  Point3D getPoint(double t)
+    {
+        Point3D p1=new Point3D(1,2,3);
+        p1=p0.add(dir.scale(t));
+        return p1;
+
+
+
+    }
 }

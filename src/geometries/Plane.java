@@ -73,7 +73,7 @@ if(isZero(ray.getP0().getX().getCoord()-_q0.getX().getCoord())&&isZero(ray.getP0
             if(t>0)
             {
                 List<Point3D> points=new ArrayList<Point3D>();
-                Point3D temp=ray.getP0().add(ray.getDir().scale(t));
+                Point3D temp=ray.getPoint(t);
                 points.add(temp);
                 return points;
             }

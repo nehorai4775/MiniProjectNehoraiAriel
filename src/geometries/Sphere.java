@@ -58,7 +58,7 @@ public class Sphere implements Geometry{
         if(isZero(ray.getP0().getX().getCoord() -_center.getX().getCoord())&&isZero(ray.getP0().getY().getCoord()-_center.getY().getCoord())
                 &&isZero(ray.getP0().getZ().getCoord()-_center.getZ().getCoord()))
         {
-            Point3D temp=ray.getP0().add(ray.getDir().scale(_radius));
+            Point3D temp=ray.getPoint(_radius);
             points.add(temp);
             return points;
         }
@@ -72,12 +72,12 @@ public class Sphere implements Geometry{
         double t2 =tm-th;
 if(t1>0)
 {
-    Point3D temp=ray.getP0().add(ray.getDir().scale(t1));
+    Point3D temp=ray.getPoint(t1);
     points.add(temp);
     }
         if(t2>0)
         {
-            Point3D temp=ray.getP0().add(ray.getDir().scale(t2));
+            Point3D temp=ray.getPoint(t2);
             points.add(temp);
         }
         if(isZero(points.size()))

@@ -23,7 +23,20 @@ public class Geometries {
         _list.add(geometries);
     }
     List<Point3D> findIntsersections(Ray ray){
-        return null;
+        if(_list.isEmpty())
+            return null;
+List<Point3D> points=new ArrayList<Point3D>();
+List<Point3D> temp=new ArrayList<Point3D>();
+
+        for (int i=0;i<_list.size();++i)
+{
+    temp=_list.get(i).findIntersections(ray);
+    if(!temp.isEmpty())
+       points.addAll(temp);
+}
+        if(points.isEmpty())
+            return null;
+        return points;
     }
 
 }
