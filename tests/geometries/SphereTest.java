@@ -122,10 +122,14 @@ class SphereTest {
         assertNull(sphere.findIntersections(new Ray(new Point3D(0, 0, 1), new Vector(1, 0, 0))),"Ray starts before the tangent point");
 
         // TC20: Ray starts at the tangent point
+        assertNull(sphere.findIntersections(new Ray(new Point3D(1, 0, 1), new Vector(1, 0, 0))),"Ray starts at the tangent point");
+
         // TC21: Ray starts after the tangent point
+        assertNull(sphere.findIntersections(new Ray(new Point3D(2, 0, 1), new Vector(1, 0, 0))),"Ray starts after the tangent point");
 
         // **** Group: Special cases
         // TC19: Ray's line is outside, ray is orthogonal to ray start to sphere's center line
+        assertNull(sphere.findIntersections(new Ray(new Point3D(2, 0, 0), new Vector(0, 0, 1))),"Ray starts after the tangent point");
 
 
 

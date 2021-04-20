@@ -55,8 +55,8 @@ public class Sphere implements Geometry{
     @Override
     public List<Point3D> findIntersections(Ray ray) {
         List<Point3D> points=new ArrayList<Point3D>();
-        if(isZero(ray.getP0().getX().getCoord()) && isZero(_center.getX().getCoord()+ray.getP0().getY().getCoord()-_center.getY().getCoord()
-                +ray.getP0().getZ().getCoord()-_center.getZ().getCoord()))
+        if(isZero(ray.getP0().getX().getCoord() -_center.getX().getCoord())&&isZero(ray.getP0().getY().getCoord()-_center.getY().getCoord())
+                &&isZero(ray.getP0().getZ().getCoord()-_center.getZ().getCoord()))
         {
             Point3D temp=ray.getP0().add(ray.getDir().scale(_radius));
             points.add(temp);
