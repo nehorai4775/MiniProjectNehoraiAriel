@@ -31,7 +31,7 @@ List<Point3D> temp=new ArrayList<Point3D>();
         for (int i=0;i<_list.size();++i)
 {
     temp=_list.get(i).findIntersections(ray);
-    if(!temp.isEmpty())
+    if(temp!=null)
        points.addAll(temp);
 }
         if(points.isEmpty())
