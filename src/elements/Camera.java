@@ -1,0 +1,95 @@
+package elements;
+
+import primitives.Point3D;
+import primitives.Ray;
+import primitives.Vector;
+
+import static primitives.Util.isZero;
+
+/**
+ * blablablablabla
+ */
+public class Camera {
+    private final Point3D _p0;
+    private final Vector _vTo;
+    private final Vector _vUp;
+    private final Vector _vRight;
+
+    private double _height;
+    private double _width;
+    private double _distance;
+
+    /**
+     *
+     * @param p0
+     * @param vTo
+     * @param vUp
+     */
+    public Camera(Point3D p0, Vector vTo, Vector vUp) {
+        if (!isZero(vTo.dotProduct(vUp))) {
+            throw new IllegalArgumentException("the vectors should be orthogonal");
+        }
+
+        _p0 = p0;
+
+        _vTo = vTo.normalized();
+        _vUp = vUp.normalized();
+
+        _vRight = _vTo.crossProduct(_vUp);
+
+    }
+
+    public Point3D getP0() {
+        return _p0;
+    }
+
+    public Vector getvTo() {
+        return _vTo;
+    }
+
+    public Vector getvUp() {
+        return _vUp;
+    }
+
+    public Vector getvRight() {
+        return _vRight;
+    }
+
+    public double getHeight() {
+        return _height;
+    }
+
+    public double getWidth() {
+        return _width;
+    }
+
+    public double getDistance() {
+        return _distance;
+    }
+    //setters using method chaining
+
+    /**
+     *
+     * @param width
+     * @param height
+     * @return the instance of Camera.
+     */
+    public Camera setViewPlaneSize(double width, double height){
+        _width=width;
+        _height=height;
+        return this;
+    }
+
+    /**
+     *
+     * @param distance
+     * @return the instance of Camera.
+     */
+    public Camera setDistance(double distance){
+        _distance=distance;
+        return this;
+    }
+
+
+}
+
