@@ -89,6 +89,24 @@ public class Camera {
         _distance=distance;
         return this;
     }
+    public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
+        Point3D pc = _p0.add(_vTo.scale(_distance));
+        double Ry = _height / nY;
+        double Rx = _width / nX;
+        double xj = Rx * (j - (double)(nX - 1) / 2);
+        double yi = -Ry*(i - (double)(nY - 1) / 2);
+
+        if (isZero(xj) && isZero(yi)) {
+            return new Ray(_p0, pc.subtract(_p0));
+        } else if (isZero(xj)) {
+            return new Ray(_p0, pc.add(_vUp.scale(-Ry *  (i - (double)(nY - 1) / 2))).subtract(_p0));
+        } else if (isZero(yi)) {
+            return new Ray(_p0, pc.add(_vRight.scale(Rx *  (j - (double)(nX - 1) / 2))).subtract(_p0));
+        } else {
+            return new Ray(_p0, pc.add(_vRight.scale(Rx *  (j - (double)(nX - 1) / 2))).add(_vUp.scale(-Ry *  (i - (double)(nY - 1) / 2))).subtract(_p0));
+
+        }
+    }
 
 
 }
