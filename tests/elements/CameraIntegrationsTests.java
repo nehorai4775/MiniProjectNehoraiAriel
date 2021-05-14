@@ -30,3 +30,4 @@ public class CameraIntegrationsTests {
         assertEquals(allPoints.size(),2,"wrong number of intersections");
     }
 }
+
