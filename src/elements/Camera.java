@@ -89,6 +89,7 @@ public class Camera {
         _distance=distance;
         return this;
     }
+    //according to the presentation
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
         Point3D pc = _p0.add(_vTo.scale(_distance));
         double Ry = _height / nY;
