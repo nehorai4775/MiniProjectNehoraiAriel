@@ -51,6 +51,8 @@ public class CameraIntegrationsTests {
 
 
 
+
+
         //Plane tests:
 
         Camera camera3=new Camera(Point3D.ZERO,new Vector(0,0,-1),new Vector(0,-1,0)).setDistance(1).setViewPlaneSize(3,3);
