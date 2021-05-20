@@ -55,6 +55,7 @@ public class CameraTest {
         assertEquals( new Ray(Point3D.ZERO, new Vector(-2, 0, 10)),
                 camera.setViewPlaneSize(6, 6).constructRayThroughPixel(3, 3, 0, 1),"Bad ray");
 
+
     }
 
 }
