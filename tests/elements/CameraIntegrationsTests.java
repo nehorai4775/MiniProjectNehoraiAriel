@@ -20,6 +20,7 @@ public class CameraIntegrationsTests {
         }
         assertEquals(count,excepted,"wrong number of intersections");
 
+
     }
     @Test
     public  void tests(){
@@ -46,6 +47,7 @@ public class CameraIntegrationsTests {
         //Fifth test case (r=0.5)
         sphere=new Sphere(new Point3D(0,0,1),0.5);
         testShapesWithCamera(camera1,sphere,0);
+
 
 
 
