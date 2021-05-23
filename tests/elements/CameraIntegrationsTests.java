@@ -9,13 +9,13 @@ import java.util.List;
 
 public class CameraIntegrationsTests {
     @Test
-    private void testShapesWithCamera(Camera c,Intersectable shape,int excepted){
-        int count = 0;
+    private void testShapesWithCamera(Camera c,Intersectable shape,int excepted){//Auxiliary function
+        int count = 0;//count of intersections
         c.setViewPlaneSize(3,3).setDistance(1);
-        for(int i=0;i<3;++i){
+        for(int i=0;i<3;++i){//I go through all the view plane
             for(int j=0;j<3;++j){
                 var intersections = shape.findIntersections(c.constructRayThroughPixel(3,3,j,i));
-                count+= intersections== null? 0 : intersections.size();
+                count+= intersections== null? 0 : intersections.size();//if there is intersection it add the number of intersections else it add 0
             }
         }
         assertEquals(count,excepted,"wrong number of intersections");

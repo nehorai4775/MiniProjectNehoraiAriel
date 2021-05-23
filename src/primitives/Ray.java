@@ -1,38 +1,52 @@
 package primitives;
 
+import java.util.List;
+
 public class Ray {
-    protected Point3D p0;
-    protected Vector dir;
+    protected Point3D _p0;
+    protected Vector _dir;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ray ray = (Ray) o;
-        return p0.equals(ray.p0) && dir.equals(ray.dir);
+        return _p0.equals(ray._p0) && _dir.equals(ray._dir);
     }
-
+//getters
     public Point3D getP0() {
-        return p0;
+        return _p0;
     }
 
     public Vector getDir() {
-        return dir;
+        return _dir;
     }
 
     // a constructor
     public Ray(Point3D p0, Vector dir) {
-        this.p0 = p0;
+        _p0 = p0;
         dir.normalize();
-        this.dir = dir;
+        _dir = dir;
     }
-    public  Point3D getPoint(double t)
-    {
+    public  Point3D getPoint(double t)//Auxiliary function
+    {//calculate the point p1 it is p0+ (dir*t)
         Point3D p1=new Point3D(1,2,3);
-        p1=p0.add(dir.scale(t));
+        p1= _p0.add(_dir.scale(t));
         return p1;
-
-
-
     }
+    public Point3D findClosestPoint(List<Point3D> list){
+        Point3D closestPoint =null;//the closest point
+        double min=0;//minimum distance
+        for(int i=0;i<list.size();++i){//I go over all the points
+            if(i==0){//if it is the first point so we should set the minimum and the closest point
+                min=list.get(i).distancr(_p0);
+                closestPoint=list.get(i);
+            }
+            else if(min>list.get(i).distancr(_p0))//if the distance small than the min so we reset the minimum and the closest point
+            {min=list.get(i).distancr(_p0);
+            closestPoint=list.get(i);
+        }
+    }
+        return closestPoint;
+}
 }

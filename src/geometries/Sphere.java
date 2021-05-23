@@ -35,7 +35,7 @@ public class Sphere implements Geometry{
         Sphere sphere = (Sphere) o;
         return Double.compare(sphere._radius, _radius) == 0 && _center.equals(sphere._center);
     }
-
+//getters
     public Point3D getCenter() {
 
         return _center;
@@ -53,7 +53,7 @@ public class Sphere implements Geometry{
                 '}';
     }
     @Override
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<Point3D> findIntersections(Ray ray) {//according to the presentation
         List<Point3D> points=new ArrayList<Point3D>();
         if(isZero(ray.getP0().getX().getCoord() -_center.getX().getCoord())&&isZero(ray.getP0().getY().getCoord()-_center.getY().getCoord())
                 &&isZero(ray.getP0().getZ().getCoord()-_center.getZ().getCoord()))
