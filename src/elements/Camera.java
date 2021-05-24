@@ -20,7 +20,7 @@ public class Camera {
     private double _distance;
 
     /**
-     *
+     *constructor
      * @param p0
      * @param vTo
      * @param vUp
