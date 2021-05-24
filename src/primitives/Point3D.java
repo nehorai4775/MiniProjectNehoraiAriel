@@ -43,7 +43,7 @@ public class Point3D {
         return (x+y+z);
     }
     //a function that returns the distance between two points
-    public double distancr(Point3D p2) {
+    public double distance(Point3D p2) {
         return Math.sqrt(distancrSquared(p2));
     }
 //A function that adds a vector to a point, and returns a new point

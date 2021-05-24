@@ -9,7 +9,7 @@ import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 
-public class Sphere implements Geometry{
+public class Sphere extends Geometry{
     private Point3D _center;
     private double _radius;
 // a constructor
@@ -52,13 +52,15 @@ public class Sphere implements Geometry{
                 ", _radius=" + _radius +
                 '}';
     }
+
+
     @Override
-    public List<Point3D> findIntersections(Ray ray) {//according to the presentation
-        List<Point3D> points=new ArrayList<Point3D>();
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        List<GeoPoint> points=new ArrayList<GeoPoint>();
         if(isZero(ray.getP0().getX().getCoord() -_center.getX().getCoord())&&isZero(ray.getP0().getY().getCoord()-_center.getY().getCoord())
                 &&isZero(ray.getP0().getZ().getCoord()-_center.getZ().getCoord()))
         {
-            Point3D temp=ray.getPoint(_radius);
+            GeoPoint temp=new GeoPoint(this,ray.getPoint(_radius));
             points.add(temp);
             return points;
         }
@@ -70,21 +72,20 @@ public class Sphere implements Geometry{
         double th= alignZero(Math.sqrt((_radius*_radius-d*d)));
         double t1= tm+th;
         double t2 =tm-th;
-if(t1>0)
-{
-    Point3D temp=ray.getPoint(t1);
-    points.add(temp);
-    }
+        if(t1>0)
+        {
+            GeoPoint temp=new GeoPoint(this,ray.getPoint(t1));
+            points.add(temp);
+        }
         if(t2>0)
         {
-            Point3D temp=ray.getPoint(t2);
+            GeoPoint temp=new GeoPoint(this,ray.getPoint(t2));
             points.add(temp);
         }
         if(isZero(points.size()))
             return null;
         return points;
-}
-
+    }
 
 
 }

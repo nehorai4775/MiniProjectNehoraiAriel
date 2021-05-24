@@ -23,24 +23,24 @@ class GeometriesTest {
 
 
 //the List is null
-assertNull(new Geometries().findIntsersections(new Ray(new Point3D(1,1,1),new Vector(0,0,1))));
+assertNull(new Geometries().findIntersections(new Ray(new Point3D(1,1,1),new Vector(0,0,1))));
 
 //the list is null
-        assertNull(list.findIntsersections(new Ray(new Point3D(10,1,10),new Vector(0,0,1))));
+        assertNull(list.findIntersections(new Ray(new Point3D(10,1,10),new Vector(0,0,1))));
 
         //all shapes are cut
 
-        List<Point3D> result=list.findIntsersections(new Ray(new Point3D(0,1,-1),new Vector(0,0,1)));
+        List<Point3D> result=list.findIntersections(new Ray(new Point3D(0,1,-1),new Vector(0,0,1)));
 
         assertEquals(3,result.size());
 
         //some of the shapes are cut
-         result=list.findIntsersections(new Ray(new Point3D(1,0,-1),new Vector(0,0,1)));
+         result=list.findIntersections(new Ray(new Point3D(1,0,-1),new Vector(0,0,1)));
 
         assertEquals(2,result.size());
 
         //cut only one shape
-        result=list.findIntsersections(new Ray(new Point3D(100,100,-1),new Vector(1,10,1)));
+        result=list.findIntersections(new Ray(new Point3D(100,100,-1),new Vector(1,10,1)));
 
         assertEquals(1,result.size());
 

@@ -8,7 +8,7 @@ import java.util.Objects;
 import static primitives.Util.isZero;
 
 //Plane class
-public class Plane implements  Geometry{
+public class Plane extends   Geometry{
     private  Point3D _q0;
     private Vector _normal;
 
@@ -63,17 +63,18 @@ public class Plane implements  Geometry{
                 ", _normal=" + _normal +
                 '}';
     }
+
     @Override
-    public List<Point3D> findIntersections(Ray ray) {//according to the presentation
-if(isZero(ray.getP0().getX().getCoord()-_q0.getX().getCoord())&&isZero(ray.getP0().getY().getCoord()-_q0.getY().getCoord())&&isZero(ray.getP0().getZ().getCoord()-_q0.getZ().getCoord()))
-        return null;
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+        if(isZero(ray.getP0().getX().getCoord()-_q0.getX().getCoord())&&isZero(ray.getP0().getY().getCoord()-_q0.getY().getCoord())&&isZero(ray.getP0().getZ().getCoord()-_q0.getZ().getCoord()))
+            return null;
         if(_normal.dotProduct(ray.getDir())!=0)
         {
             double t= (_normal.dotProduct(_q0.subtract(ray.getP0()))/_normal.dotProduct(ray.getDir()));
             if(t>0)
             {
-                List<Point3D> points=new ArrayList<Point3D>();
-                Point3D temp=ray.getPoint(t);
+                List<GeoPoint> points=new ArrayList<GeoPoint>();
+                GeoPoint temp=new GeoPoint(this,ray.getPoint(t));
                 points.add(temp);
                 return points;
             }
@@ -82,6 +83,7 @@ if(isZero(ray.getP0().getX().getCoord()-_q0.getX().getCoord())&&isZero(ray.getP0
         }
         else
             return null;
+
     }
 
 

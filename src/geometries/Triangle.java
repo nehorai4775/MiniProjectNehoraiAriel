@@ -1,6 +1,7 @@
 package geometries;
 import primitives.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static primitives.Util.isZero;
@@ -24,25 +25,29 @@ public class Triangle extends Polygon {
                 ", plane=" + plane +
                 '}';
     }
+
     @Override
-    public List<Point3D> findIntersections(Ray ray) {//according to the presentation
-        if(ray.getP0().equals(super.plane.getQ0()))
+    public List<GeoPoint> findGeoIntersections(Ray ray) {
+
+        if (ray.getP0().equals(super.plane.getQ0()))
             return null;
-        else
-        {
-List<Point3D> pointIntersection=super.plane.findIntersections(ray);
-
-    Vector v1 = super.vertices.get(0).subtract(ray.getP0());
-    Vector v2 = super.vertices.get(1).subtract(ray.getP0());
-    Vector v3 = super.vertices.get(2).subtract(ray.getP0());
-    Vector n1 = (v1.crossProduct(v2)).normalize();
-    Vector n2 = (v2.crossProduct(v3)).normalize();
-    Vector n3 = (v3.crossProduct(v1)).normalize();
-    if (((ray.getDir().dotProduct(n1))>0&& (ray.getDir().dotProduct(n2)>0 && (ray.getDir().dotProduct(n3))>0)||(ray.getDir().dotProduct(n1))<0&& (ray.getDir().dotProduct(n2)<0 && (ray.getDir().dotProduct(n3))<0)))
-        return pointIntersection;
-    else
-        return null;
-
+        else {
+            List<GeoPoint> pointIntersection = super.plane.findGeoIntersections(ray);
+            if(pointIntersection!=null)
+              pointIntersection.get(0)._geometry=this;
+            else
+                return null;
+            Vector v1 = super.vertices.get(0).subtract(ray.getP0());
+            Vector v2 = super.vertices.get(1).subtract(ray.getP0());
+            Vector v3 = super.vertices.get(2).subtract(ray.getP0());
+            Vector n1 = (v1.crossProduct(v2)).normalize();
+            Vector n2 = (v2.crossProduct(v3)).normalize();
+            Vector n3 = (v3.crossProduct(v1)).normalize();
+            if (((ray.getDir().dotProduct(n1)) > 0 && (ray.getDir().dotProduct(n2) > 0 && (ray.getDir().dotProduct(n3)) > 0) || (ray.getDir().dotProduct(n1)) < 0 && (ray.getDir().dotProduct(n2) < 0 && (ray.getDir().dotProduct(n3)) < 0))) {
+                return pointIntersection;
+            }
+            else
+                return null;
         }
     }
 }

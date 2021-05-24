@@ -8,7 +8,6 @@ benshoshan60@gmail.com
 * */
 import org.junit.jupiter.api.Test;
 
-import static java.lang.System.out;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Point3DTest {
@@ -26,7 +25,7 @@ assertTrue(p1.distancrSquared(p2)==126,"distanceSquared doesn't good");
         // ============ Equivalence Partitions Tests ==============
         Point3D p1 = new Point3D(1, 2, 3);
         Point3D p2 = new Point3D(-2, -4, -6);
-        assertTrue(p1.distancr(p2)==Math.sqrt(126),"distanceSquared doesn't good");
+        assertTrue(p1.distance(p2)==Math.sqrt(126),"distanceSquared doesn't good");
     }
 
     @Test

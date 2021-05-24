@@ -25,7 +25,7 @@ public class Render {
         _rayTracerBasic = rayTracerBasic;
         return this;
     }
-    void renderImage(){
+    public void renderImage(){
         if(_camera==null)//Failure to enter data throws error
             throw new MissingResourceException("there isn't have a value in camera","camera",null);
         if(_imageWriter==null)
@@ -40,6 +40,7 @@ public class Render {
     public void printGrid(int interval, Color color){
         if(_imageWriter==null)//Failure to enter data throws error
             throw new MissingResourceException("there isn't have a value in imageWriter","imageWriter",null);
+
         for(int i=0;i<_imageWriter.getNx();++i)//Paint the grid
             for (int j=0;j<_imageWriter.getNy();++j){
 
