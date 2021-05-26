@@ -137,9 +137,49 @@ class LightsTests {
         Render render = new Render()//
                 .setImageWriter(imageWriter) //
                 .setCamera(camera2) //
+                .setRayTracer(new RayTracerBasic(scene2))
+                .setRayTracer(new RayTracerBasic(scene1));
+        render.renderImage();
+        render.writeToImage();
+    }
+/////
+@Test
+public void spectacular_sphere() {
+    scene1._geometries.add(sphere);
+    scene1.lights.add(new DirectionalLight(new Color(0, 500, 500), new Vector(1,1,-1)));
+    scene1.lights.add(new DirectionalLight(new Color(300,250,250),new Vector(50,-100,0)));
+    scene1.lights.add(new DirectionalLight(new Color(600,0,0),new Vector(-100,25,1)));
+
+    ImageWriter imageWriter = new ImageWriter("spectacular_sphere", 500, 500);
+    Render render = new Render()//
+            .setImageWriter(imageWriter) //
+            .setCamera(camera1) //
+            .setRayTracer(new RayTracerBasic(scene1));
+    render.renderImage();
+    render.writeToImage();
+}
+
+    @Test
+    public void spectacular_triangle() {
+        scene2._geometries.add(triangle1.setMaterial(new Material().setKd(0.8).setKs(0.2).setNshininess(300))); //
+        scene2._geometries.add(triangle2.setMaterial(new Material().setKd(0.8).setKs(0.2).setNshininess(300)));
+        scene2.lights.add(new DirectionalLight(new Color(0, 150, 150), new Vector(0, 0, -1)));
+        scene2.lights.add(new DirectionalLight(new Color(350, 0, 150), new Vector(-1, 0, 0)));
+        scene2.lights.add(new DirectionalLight(new Color(0, 100, 100), new Vector(-100, 0, -100)));
+
+
+
+        ImageWriter imageWriter = new ImageWriter("spectacular_triangle", 500, 500);
+        Render render = new Render()//
+                .setImageWriter(imageWriter) //
+                .setCamera(camera2) //
                 .setRayTracer(new RayTracerBasic(scene2));
         render.renderImage();
         render.writeToImage();
     }
+
+
+
+
 
 }
