@@ -149,6 +149,12 @@ public void spectacular_sphere() {
     scene1.lights.add(new DirectionalLight(new Color(300,250,250),new Vector(50,-100,0)));
     scene1.lights.add(new DirectionalLight(new Color(600,0,0),new Vector(-100,25,1)));
 
+    scene1.lights.add(new SpotLight(new Color(0, 0, 10), new Point3D(-50, -50, 50), new Vector(1, 1, -2)) //
+            .setKl(0.00001).setKq(0.00000001));
+    scene1.lights.add(new PointLight(new Color(0, 10, 0), new Point3D(-50, -50, 50))//
+            .setKl(0.00001).setKq(0.000001));
+
+
     ImageWriter imageWriter = new ImageWriter("spectacular_sphere", 500, 500);
     Render render = new Render()//
             .setImageWriter(imageWriter) //
@@ -165,6 +171,11 @@ public void spectacular_sphere() {
         scene2.lights.add(new DirectionalLight(new Color(0, 150, 150), new Vector(0, 0, -1)));
         scene2.lights.add(new DirectionalLight(new Color(350, 0, 150), new Vector(-1, 0, 0)));
         scene2.lights.add(new DirectionalLight(new Color(0, 100, 100), new Vector(-100, 0, -100)));
+        scene2.lights.add(new PointLight(new Color(0, 200, 100), new Point3D(10, -10, -130)) //
+                .setKl(0.0005).setKq(0.0005));
+        scene2.lights.add(new SpotLight(new Color(300, 0, 0), new Point3D(10, -10, -130), new Vector(-20, 10, -1)) //
+                .setKl(0.0001).setKq(0.000005));
+
 
 
 
