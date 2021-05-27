@@ -145,13 +145,11 @@ class LightsTests {
 @Test
 public void spectacular_sphere() {
     scene1._geometries.add(sphere);
-    scene1.lights.add(new DirectionalLight(new Color(0, 500, 500), new Vector(1,1,-1)));
-    scene1.lights.add(new DirectionalLight(new Color(300,250,250),new Vector(50,-100,0)));
-    scene1.lights.add(new DirectionalLight(new Color(600,0,0),new Vector(-100,25,1)));
+    scene1.lights.add(new DirectionalLight(new Color(600,0,0),new Vector(-100,25,-10)));
 
-    scene1.lights.add(new SpotLight(new Color(0, 0, 10), new Point3D(-50, -50, 50), new Vector(1, 1, -2)) //
+    scene1.lights.add(new SpotLight(new Color(500,500,0), new Point3D(-10, 50, -10), new Vector(1,-10,0)) //
             .setKl(0.00001).setKq(0.00000001));
-    scene1.lights.add(new PointLight(new Color(0, 10, 0), new Point3D(-50, -50, 50))//
+    scene1.lights.add(new PointLight(new Color(0, 500, 500), new Point3D(-50, -10, 1))//
             .setKl(0.00001).setKq(0.000001));
 
 
@@ -168,12 +166,14 @@ public void spectacular_sphere() {
     public void spectacular_triangle() {
         scene2._geometries.add(triangle1.setMaterial(new Material().setKd(0.8).setKs(0.2).setNshininess(300))); //
         scene2._geometries.add(triangle2.setMaterial(new Material().setKd(0.8).setKs(0.2).setNshininess(300)));
-        scene2.lights.add(new DirectionalLight(new Color(0, 150, 150), new Vector(0, 0, -1)));
-        scene2.lights.add(new DirectionalLight(new Color(350, 0, 150), new Vector(-1, 0, 0)));
-        scene2.lights.add(new DirectionalLight(new Color(0, 100, 100), new Vector(-100, 0, -100)));
-        scene2.lights.add(new PointLight(new Color(0, 200, 100), new Point3D(10, -10, -130)) //
+       // scene2.lights.add(new DirectionalLight(new Color(0, 150, 150), new Vector(0, 0, -1)));
+       // scene2.lights.add(new DirectionalLight(new Color(350, 0, 150), new Vector(-1, 0, 0)));
+       // scene2.lights.add(new DirectionalLight(new Color(0, 100, 100), new Vector(-100, 0, -100)));
+        scene2.lights.add(new DirectionalLight(new Color(0, 20, 100), new Vector(-100, 0, -100)));
+
+        scene2.lights.add(new PointLight(new Color(500, 500, 0), new Point3D(-50, 50, -130)) //
                 .setKl(0.0005).setKq(0.0005));
-        scene2.lights.add(new SpotLight(new Color(300, 0, 0), new Point3D(10, -10, -130), new Vector(-20, 10, -1)) //
+        scene2.lights.add(new SpotLight(new Color(200, 0, 0), new Point3D(0, -50, -50), new Vector(1, 1, -1)) //
                 .setKl(0.0001).setKq(0.000005));
 
 
