@@ -12,7 +12,12 @@ public class Plane extends   Geometry{
     private  Point3D _q0;
     private Vector _normal;
 
-    //a contractor that gets three Point3Ds as parameters
+    /**
+     * contractor,makes a Plane from three points
+     * @param a
+     * @param b
+     * @param c
+     */
     public Plane(Point3D a,Point3D b,Point3D c)
     {
 
@@ -27,23 +32,41 @@ public class Plane extends   Geometry{
         _normal = v3.normalize();
 
     }
-//a constructor that gets a vector and a point as parameters
+
+    /**
+     *  contractor,makes a Plane from one point and one vector
+     * @param a
+     * @param v
+     */
     public Plane(Point3D a,Vector v)
     {
         _normal = v.normalize();
         _q0 = a;
     }
-    //a function that gets a Point3D as parameter and returns the normal
+
+    /**
+     * getter
+     * @param s
+     * @return the normal by a point
+     */
     public Vector getNormal(Point3D s){
 
         return _normal;
     }
-    //a function that returns the normal
+
+    /**
+     * getter
+     * @return the normal
+     */
     public Vector getNormal(){
 
         return _normal;
     }
-    //a function that returns the q0
+
+    /**
+     * getter
+     * @return q0
+     */
     public Point3D getQ0() {
         return _q0;
     }

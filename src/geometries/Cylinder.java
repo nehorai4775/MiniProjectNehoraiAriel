@@ -5,7 +5,13 @@ import java.util.Objects;
 
 public class Cylinder extends Tube{
     double _height;
-// a constructor
+
+    /**
+     * constructor
+     * @param height
+     * @param axisRay
+     * @param radius
+     */
     public Cylinder(double height,Ray axisRay,double radius) {
         super(axisRay,radius);
         _height = height;

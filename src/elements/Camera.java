@@ -89,6 +89,15 @@ public class Camera {
         _distance=distance;
         return this;
     }
+
+    /**
+     *The function creates a ray from the camera to the pixel
+     * @param nX
+     * @param nY
+     * @param j
+     * @param i
+     * @return
+     */
     //according to the presentation
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
         Point3D pc = _p0.add(_vTo.scale(_distance));

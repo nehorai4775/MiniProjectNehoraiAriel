@@ -7,11 +7,21 @@ import java.util.List;
 import static primitives.Util.isZero;
 
 public class Triangle extends Polygon {
-//a contractor that gets three Point3Ds as parameters And uses the father's contractor
+    /**
+     * contractor, uses the father's contractor
+     * @param a
+     * @param b
+     * @param c
+     */
     public Triangle(Point3D a,Point3D b,Point3D c){
         super(a,b,c);
     }
-    //a function that returns the normal
+
+    /**
+     * getter
+     * @param p
+     * @return
+     */
     public  Vector getNormal(Point3D p) {
 //according to what that be displayed
 

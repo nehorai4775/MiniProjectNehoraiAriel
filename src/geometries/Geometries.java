@@ -9,20 +9,37 @@ import java.util.List;
 public class Geometries implements Intersectable {
     List<Intersectable> _list;
 
-
+    /**
+     * constructor
+     * @param geometries list
+     */
     Geometries(Intersectable... geometries){
 
         _list = new ArrayList<Intersectable>(Arrays.asList(geometries));
     }
 
+    /**
+     * default constructor, empty list
+     */
     public Geometries(){
 //empty list
         _list = new ArrayList<Intersectable>(Arrays.asList());
     }
+
+    /**
+     * add a shape to the list
+     * @param geometries
+     */
     public void add(Intersectable geometries)
     {
         _list.add(geometries);
     }
+
+    /**
+     * function findIntersections
+     * @param ray that intersect the geometries
+     * @return intersection points
+     */
 
      public List<Point3D> findIntersections(Ray ray){
         if(_list.isEmpty())

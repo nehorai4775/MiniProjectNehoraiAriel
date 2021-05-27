@@ -7,15 +7,25 @@ import java.util.Objects;
 public class Tube extends Geometry{
     private Ray _axisRay;
     private double _radius;
-// a constructor
+
+    /**
+     * constructor
+     * @param axisRay
+     * @param radius
+     */
     public Tube(Ray axisRay,double radius){
         _axisRay = axisRay;
         if(radius==0)
             throw new IllegalArgumentException();
         _radius = radius;
     }
-    //a function that returns the normal
-    public Vector getNormal(Point3D p){
+
+    /**
+     * getter
+     * @param p
+     * @return normal
+     */
+     public Vector getNormal(Point3D p){
 //according to what that be displayed
 
         double t =_axisRay.getDir().dotProduct(p.subtract(_axisRay.getP0()));

@@ -10,21 +10,43 @@ public class Render {
     Camera _camera;
     RayTracerBasic _rayTracerBasic;
 //setters
+
+    /**
+     * setter
+     * @param imageWriter
+     * @return this
+     */
     public Render setImageWriter(ImageWriter imageWriter) {
         _imageWriter = imageWriter;
         return this;
     }
 
+    /**
+     * setter
+     * @param camera
+     * @return this
+     */
     public Render setCamera(Camera camera) {
         _camera = camera;
         return this;
 
     }
 
+    /**
+     * setter
+     * @param rayTracerBasic
+     * @return this
+     */
     public Render setRayTracer(RayTracerBasic rayTracerBasic) {
         _rayTracerBasic = rayTracerBasic;
         return this;
     }
+
+    /**
+     * Performs a loop that goes through all the pixels of the ViewPlane,
+      for each pixel that builds a beam and for each beam we get a color from the horn comb.
+      Name the color in the appropriate pixel of the image maker (writePixel)
+     */
     public void renderImage(){
         if(_camera==null)//Failure to enter data throws error
             throw new MissingResourceException("there isn't have a value in camera","camera",null);
@@ -37,6 +59,16 @@ public class Render {
                 _imageWriter.writePixel(i,j,color);
             }
     }
+
+    /**
+     *Creates a grid of lines, initially the
+      bodhithe method that in the field of the image manufacturer
+      entered a non-empty value
+      (and in case of lack of throwing an appropriate exception,
+      for example MissingResourcesException)
+     * @param interval
+     * @param color
+     */
     public void printGrid(int interval, Color color){
         if(_imageWriter==null)//Failure to enter data throws error
             throw new MissingResourceException("there isn't have a value in imageWriter","imageWriter",null);
@@ -50,6 +82,13 @@ public class Render {
         _imageWriter.writeToImage();
     }
 
+    /**
+     * The method first checks that in the field of the image maker a
+       non-empty value was entered
+      (and in case of lack throws an appropriate exception,
+      for example MissingResourcesException) and then maps (delegation!)
+      The appropriate method of the image maker.
+     */
     public void writeToImage(){
         if(_imageWriter==null)//Failure to enter data throws error
             throw new MissingResourceException("there isn't have a value in imageWriter","imageWriter",null);

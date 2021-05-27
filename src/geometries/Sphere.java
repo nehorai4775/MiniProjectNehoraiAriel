@@ -12,7 +12,12 @@ import static primitives.Util.isZero;
 public class Sphere extends Geometry{
     private Point3D _center;
     private double _radius;
-// a constructor
+
+    /**
+     * constructor
+     * @param center
+     * @param radius
+     */
     public Sphere(Point3D center,double radius){
 
         _center = center;
@@ -20,7 +25,12 @@ public class Sphere extends Geometry{
             throw new IllegalArgumentException();
         _radius = radius;
     }
-    //a function that returns the normal
+
+    /**
+     * getter
+     * @param p
+     * @return p
+     */
     public Vector getNormal(Point3D p){
         //according to what that be displayed
 
@@ -54,6 +64,11 @@ public class Sphere extends Geometry{
     }
 
 
+    /**
+     *
+     * @param ray
+     * @return Intersections points
+     */
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray) {
         List<GeoPoint> points=new ArrayList<GeoPoint>();
