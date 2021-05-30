@@ -39,12 +39,21 @@ public class SpotLight extends PointLight{
      */
     @Override
     public Color getIntensity(Point3D p) {
-        return super.getIntensity().scale(Math.max(0,direction.normalize().dotProduct(getL(p).normalize())));
+        return super.getIntensity(p).scale(Math.max(0,direction.normalize().dotProduct(getL(p).normalize())));
     }
 
 
     @Override
     public Vector getL(Point3D p) {
         return super.getL(p);
+    }
+
+    /**
+     * getter
+     * @param point
+     * @return distance
+     */
+    public double getDistance(Point3D point){
+       return super.getDistance(point);
     }
 }

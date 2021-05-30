@@ -61,13 +61,18 @@ List<Point3D> temp=new ArrayList<Point3D>();
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray) {
 
+
             List<GeoPoint> intersections = new ArrayList<GeoPoint>();
             for (int i=0;i<_list.size();++i) {
                 List<GeoPoint> geoIntersections = _list.get(i).findGeoIntersections(ray);
                 if (geoIntersections != null)
                     intersections.addAll(geoIntersections);
             }
+
             return intersections;
         }
+
+
+
     }
 

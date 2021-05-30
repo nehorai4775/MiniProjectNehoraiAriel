@@ -78,4 +78,13 @@ public class PointLight extends Light implements LightSource{
         _kq = kq;
         return this;
     }
+
+    /**
+     * getter
+     * @param point
+     * @return distance
+     */
+    public double getDistance(Point3D point){
+       return _position.distance(point);
+    }
 }
