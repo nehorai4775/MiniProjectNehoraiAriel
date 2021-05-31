@@ -203,7 +203,9 @@ public class RayTracerBasic extends RayTracerBase {
      * @return ray
      */
     private Ray ConstructingReflectedRay(Vector v,Vector n, Point3D point){
-        return new Ray(point,v.subtract((n.crossProduct(v.crossProduct(n))).scale(2)));
+        Vector delta = n.scale(n.dotProduct(v) > 0 ? DELTA : - DELTA);
+        Point3D _point = point.add(delta);
+        return new Ray(_point,v.subtract((n.crossProduct(v.crossProduct(n))).scale(2)));
     }
 
     /**
@@ -212,8 +214,10 @@ public class RayTracerBasic extends RayTracerBase {
      * @param point-p0
      * @return ray
      */
-    private Ray ConstructingRefractedRay(Vector v,Point3D point){
-        return new Ray(point,v);
+    private Ray ConstructingRefractedRay(Vector v,Vector n,Point3D point){
+        Vector delta = n.scale(n.dotProduct(v) > 0 ? DELTA : - DELTA);
+        Point3D _point = point.add(delta);
+        return new Ray(_point,v);
     }
 
 
