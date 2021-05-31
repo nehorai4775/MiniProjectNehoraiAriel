@@ -3,12 +3,38 @@ package primitives;
 public class Material {
     public double _Kd,_Ks;
     public int _nshininess;
-
+    /**
+     * kt-Promotes transparency
+     * kr-Coefficient of reflection
+     */
+    public double _kt,_kr;
 
     public Material() {
         _Kd=0;
         _Ks=0;
         _nshininess=0;
+        _kr=0.0;
+        _kt=0.0;
+    }
+
+    /**
+     * setter
+     * @param kt-Promotes transparency
+     * @return this
+     */
+    public Material setKt(double kt) {
+        _kt = kt;
+        return this;
+    }
+
+    /**
+     * setter
+     * @param kr-Coefficient of reflection
+     * @return this
+     */
+    public Material setKr(double kr) {
+        _kr = kr;
+        return this;
     }
 
     /**
