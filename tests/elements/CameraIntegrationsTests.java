@@ -4,9 +4,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import primitives.*;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class CameraIntegrationsTests {
     @Test
     private void testShapesWithCamera(Camera c,Intersectable shape,int excepted){//Auxiliary function
@@ -24,7 +21,7 @@ public class CameraIntegrationsTests {
 @Test
     public  void tests(){
         //the Spheres tests
-    Sphere sphere=new Sphere(new Point3D(0,0,-3),1);
+    Sphere sphere=new Sphere(1, new Point3D(0,0,-3));
     Camera camera1=new Camera(Point3D.ZERO,new Vector(0,0,-1),new Vector(0,1,0)).setDistance(1).setViewPlaneSize(3,3);
     Camera camera2=new Camera(new Point3D(0,0,0.5),new Vector(0,0,-1),new Vector(0,1,0)).setDistance(1).setViewPlaneSize(3,3);
 
@@ -32,19 +29,19 @@ public class CameraIntegrationsTests {
     testShapesWithCamera(camera1,sphere,2);
 
         //Second test case (r=2.5)
-     sphere=new Sphere(new Point3D(0,0,-2.5),2.5);
+     sphere=new Sphere(2.5, new Point3D(0,0,-2.5));
     testShapesWithCamera(camera2,sphere,18);
 
     //third test case (r=2)
-    sphere=new Sphere(new Point3D(0,0,-2),2);
+    sphere=new Sphere(2, new Point3D(0,0,-2));
     testShapesWithCamera(camera2,sphere,10);
 
     //Fourth test case (r=4)
-    sphere=new Sphere(new Point3D(0,0,-1),4);
+    sphere=new Sphere(4, new Point3D(0,0,-1));
     testShapesWithCamera(camera2,sphere,9);
 
     //Fifth test case (r=0.5)
-    sphere=new Sphere(new Point3D(0,0,1),0.5);
+    sphere=new Sphere(0.5, new Point3D(0,0,1));
     testShapesWithCamera(camera1,sphere,0);
 
 

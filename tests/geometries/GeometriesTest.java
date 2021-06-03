@@ -5,7 +5,6 @@ import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +16,7 @@ class GeometriesTest {
 
         Geometries list = new Geometries(new Plane(new Point3D(1,0,0),new Point3D(0,1,0),new Point3D(0,2,0)),
                 new Triangle(new Point3D(0,1.5,0),new Point3D(1,0,0),new Point3D(-1,0,0)),
-                new Sphere(new Point3D(1, 0, 0),2d));
+                new Sphere(2d, new Point3D(1, 0, 0)));
 
 
 

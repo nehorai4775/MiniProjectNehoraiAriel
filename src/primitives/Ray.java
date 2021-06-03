@@ -5,8 +5,18 @@ import geometries.Intersectable.GeoPoint;
 import java.util.List;
 
 public class Ray {
-    protected Point3D _p0;
-    protected Vector _dir;
+
+    private static final double DELTA = 0.1;
+
+
+    private final  Point3D _p0;
+    private final  Vector _dir;
+
+    public Ray(Point3D point, Vector v, Vector n) {
+        Vector delta = n.scale(n.dotProduct(v) > 0 ? DELTA : - DELTA);
+        _p0 = point.add(delta);
+        _dir = v;
+    }
 
     @Override
     public boolean equals(Object o) {

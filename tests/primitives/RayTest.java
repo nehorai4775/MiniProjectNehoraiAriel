@@ -1,7 +1,6 @@
 package primitives;
 
 import org.junit.jupiter.api.Test;
-import scene.Scene;
 import geometries.*;
 import geometries.Intersectable.GeoPoint;
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ list.add(p2);
     @Test
     void testFindGeoClosestPoint() {
         Ray ray=new Ray(new Point3D(0,0,0),new Vector(1,0,0));
-        Sphere sphere=new Sphere(new Point3D(1,1,1),20);
+        Sphere sphere=new Sphere(20, new Point3D(1,1,1));
         GeoPoint p0=new GeoPoint(sphere,new Point3D(0,2,0));
         GeoPoint p1=new GeoPoint(sphere,new Point3D(0,0,1));
         GeoPoint p2=new GeoPoint(sphere,new Point3D(3,0,0));

@@ -5,11 +5,7 @@ import org.junit.jupiter.api.Test;
 import elements.*;
 import geometries.*;
 import primitives.*;
-import renderer.*;
 import scene.Scene;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Test rendering a basic image
@@ -31,14 +27,14 @@ public class RenderTests {
                 .setAmbientLight(new AmbientLight(new Color(255, 191, 191), 1)) //
                 .setBackground(new Color(75, 127, 90));
 
-        scene._geometries.add( new Sphere(new Point3D(0, 0, -100),50));
-        scene._geometries.add( new Triangle(new Point3D(-100, 0, -100) , new Point3D(0, 100, -100), new Point3D(-100, 100, -100)));//up
+        scene.geometries.add( new Sphere(50, new Point3D(0, 0, -100)));
+        scene.geometries.add( new Triangle(new Point3D(-100, 0, -100) , new Point3D(0, 100, -100), new Point3D(-100, 100, -100)));//up
         //left
-        scene._geometries.add( new Triangle(new Point3D(100, 0, -100) , new Point3D(0, 100, -100), new Point3D(100, 100, -100)));//up
+        scene.geometries.add( new Triangle(new Point3D(100, 0, -100) , new Point3D(0, 100, -100), new Point3D(100, 100, -100)));//up
         //right
-        scene._geometries.add(  new Triangle(new Point3D(-100, 0, -100), new Point3D(0, -100, -100), new Point3D(-100, -100, -100)));//left
+        scene.geometries.add(  new Triangle(new Point3D(-100, 0, -100), new Point3D(0, -100, -100), new Point3D(-100, -100, -100)));//left
         //left
-        scene._geometries.add(  new Triangle(new Point3D(100, 0, -100), new Point3D(0, -100, -100), new Point3D(100, -100, -100)));//left
+        scene.geometries.add(  new Triangle(new Point3D(100, 0, -100), new Point3D(0, -100, -100), new Point3D(100, -100, -100)));//left
         // right
 
         ImageWriter imageWriter = new ImageWriter("base render test", 1000, 1000);
@@ -82,14 +78,14 @@ public class RenderTests {
         Scene scene = new Scene("Test scene")//
                 .setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), 0.2)); //
 
-        scene._geometries.add(new Sphere( new Point3D(0, 0, -100),50) //
+        scene.geometries.add(new Sphere(50, new Point3D(0, 0, -100)) //
                         .setEmission(new Color(java.awt.Color.CYAN))); //
-        scene._geometries.add(new Triangle(new Point3D(-100, 0, -100), new Point3D(0, 100, -100), new Point3D(-100, 100, -100)) // up left
+        scene.geometries.add(new Triangle(new Point3D(-100, 0, -100), new Point3D(0, 100, -100), new Point3D(-100, 100, -100)) // up left
                         .setEmission(new Color(java.awt.Color.GREEN)));
-        scene._geometries.add(new Triangle(new Point3D(100, 0, -100), new Point3D(0, 100, -100), new Point3D(100, 100, -100))); // up right
-        scene._geometries.add(new Triangle(new Point3D(-100, 0, -100), new Point3D(0, -100, -100), new Point3D(-100, -100, -100)) // down left
+        scene.geometries.add(new Triangle(new Point3D(100, 0, -100), new Point3D(0, 100, -100), new Point3D(100, 100, -100))); // up right
+        scene.geometries.add(new Triangle(new Point3D(-100, 0, -100), new Point3D(0, -100, -100), new Point3D(-100, -100, -100)) // down left
                         .setEmission(new Color(java.awt.Color.RED)));
-        scene._geometries.add(new Triangle(new Point3D(100, 0, -100), new Point3D(0, -100, -100), new Point3D(100, -100, -100)) // down right
+        scene.geometries.add(new Triangle(new Point3D(100, 0, -100), new Point3D(0, -100, -100), new Point3D(100, -100, -100)) // down right
                         .setEmission(new Color(java.awt.Color.BLUE)));
 
         ImageWriter imageWriter = new ImageWriter("color render test", 1000, 1000);

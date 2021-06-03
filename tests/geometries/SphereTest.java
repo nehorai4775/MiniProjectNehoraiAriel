@@ -21,7 +21,7 @@ class SphereTest {
         // ============ Equivalence Partitions Tests ==============
         try {
             //constructing a correct Sphere
-            new Sphere(new Point3D(1,2,3),5);
+            new Sphere(5, new Point3D(1,2,3));
 
         }
         catch (IllegalArgumentException e) {
@@ -30,7 +30,7 @@ class SphereTest {
         // =============== Boundary Values Tests ==================
         try {
             // when the radius is zero
-            new Sphere(new Point3D(1,2,3),0);
+            new Sphere(0, new Point3D(1,2,3));
             fail("Failed constructing when the radius is zero");
         }
         catch (IllegalArgumentException e) {
@@ -42,14 +42,14 @@ class SphereTest {
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
         //test the get normal
-       Sphere sp= new Sphere(new Point3D(0,1,2),5);
+       Sphere sp= new Sphere(5, new Point3D(0,1,2));
         double sqrt3 = Math.sqrt(1d / 3);
 
         assertEquals( new Vector(sqrt3, sqrt3, sqrt3), sp.getNormal(new Point3D(1, 2, 3)),"Bad normal to Sphere");
     }
     @Test
     public void testfindIntersections() {
-        Sphere sphere = new Sphere(new Point3D(1, 0, 0),1d);
+        Sphere sphere = new Sphere(1d, new Point3D(1, 0, 0));
 
         // ============ Equivalence Partitions Tests ==============
 

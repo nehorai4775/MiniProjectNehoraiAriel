@@ -3,7 +3,6 @@ package elements;
 
 import org.junit.jupiter.api.Test;
 
-import elements.*;
 import geometries.*;
 import primitives.*;
 import renderer.*;
@@ -29,16 +28,16 @@ class LightsTests {
             new Point3D(-150, -150, -150), new Point3D(150, -150, -150), new Point3D(75, 75, -150));
     private static Geometry triangle2 = new Triangle( //
             new Point3D(-150, -150, -150), new Point3D(-70, 70, -50), new Point3D(75, 75, -150));
-    private static Geometry sphere = new Sphere( new Point3D(0, 0, -50),50) //
+    private static Geometry sphere = new Sphere(50, new Point3D(0, 0, -50)) //
             .setEmission(new Color(java.awt.Color.BLUE)) //
-            .setMaterial(new Material().setKd(0.5).setKs(0.5).setNshininess(100));
+            .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(100));
 
     /**
      * Produce a picture of a sphere lighted by a directional light
      */
     @Test
     public void sphereDirectional() {
-        scene1._geometries.add(sphere);
+        scene1.geometries.add(sphere);
         scene1.lights.add(new DirectionalLight(new Color(500, 300, 0), new Vector(1, 1, -1)));
 
         ImageWriter imageWriter = new ImageWriter("lightSphereDirectional", 500, 500);
@@ -55,7 +54,7 @@ class LightsTests {
      */
     @Test
     public void spherePoint() {
-        scene1._geometries.add(sphere);
+        scene1.geometries.add(sphere);
         scene1.lights.add(new PointLight(new Color(500, 300, 0), new Point3D(-50, -50, 50))//
                 .setKl(0.00001).setKq(0.000001));
 
@@ -73,7 +72,7 @@ class LightsTests {
      */
     @Test
     public void sphereSpot() {
-        scene1._geometries.add(sphere);
+        scene1.geometries.add(sphere);
         scene1.lights.add(new SpotLight(new Color(500, 300, 0), new Point3D(-50, -50, 50), new Vector(1, 1, -2)) //
                 .setKl(0.00001).setKq(0.00000001));
 
@@ -91,8 +90,8 @@ class LightsTests {
      */
     @Test
     public void trianglesDirectional() {
-        scene2._geometries.add(triangle1.setMaterial(new Material().setKd(0.8).setKs(0.2).setNshininess(300))); //
-        scene2._geometries.add(triangle2.setMaterial(new Material().setKd(0.8).setKs(0.2).setNshininess(300)));
+        scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.8).setKs(0.2).setShininess(300))); //
+        scene2.geometries.add(triangle2.setMaterial(new Material().setKd(0.8).setKs(0.2).setShininess(300)));
         scene2.lights.add(new DirectionalLight(new Color(300, 150, 150), new Vector(0, 0, -1)));
 
         ImageWriter imageWriter = new ImageWriter("lightTrianglesDirectional", 500, 500);
@@ -109,8 +108,8 @@ class LightsTests {
      */
     @Test
     public void trianglesPoint() {
-        scene2._geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setNshininess(300))); //
-        scene2._geometries.add(triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setNshininess(300)));
+        scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300))); //
+        scene2.geometries.add(triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)));
         scene2.lights.add(new PointLight(new Color(500, 250, 250), new Point3D(10, -10, -130)) //
                 .setKl(0.0005).setKq(0.0005));
 
@@ -128,8 +127,8 @@ class LightsTests {
      */
     @Test
     public void trianglesSpot() {
-        scene2._geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setNshininess(300)));
-        scene2._geometries.add(triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setNshininess(300)));
+        scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)));
+        scene2.geometries.add(triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)));
         scene2.lights.add(new SpotLight(new Color(500, 250, 250), new Point3D(10, -10, -130), new Vector(-2, -2, -1)) //
                 .setKl(0.0001).setKq(0.000005));
 
@@ -144,7 +143,7 @@ class LightsTests {
 /////
 @Test
 public void spectacular_sphere() {
-    scene1._geometries.add(sphere);
+    scene1.geometries.add(sphere);
     scene1.lights.add(new DirectionalLight(new Color(600,0,0),new Vector(-100,25,-10)));
 
     scene1.lights.add(new SpotLight(new Color(500,500,0), new Point3D(-10, 50, -10), new Vector(1,-10,0)) //
@@ -164,8 +163,8 @@ public void spectacular_sphere() {
 
     @Test
     public void spectacular_triangle() {
-        scene2._geometries.add(triangle1.setMaterial(new Material().setKd(0.8).setKs(0.2).setNshininess(300))); //
-        scene2._geometries.add(triangle2.setMaterial(new Material().setKd(0.8).setKs(0.2).setNshininess(300)));
+        scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.8).setKs(0.2).setShininess(300))); //
+        scene2.geometries.add(triangle2.setMaterial(new Material().setKd(0.8).setKs(0.2).setShininess(300)));
        // scene2.lights.add(new DirectionalLight(new Color(0, 150, 150), new Vector(0, 0, -1)));
        // scene2.lights.add(new DirectionalLight(new Color(350, 0, 150), new Vector(-1, 0, 0)));
        // scene2.lights.add(new DirectionalLight(new Color(0, 100, 100), new Vector(-100, 0, -100)));

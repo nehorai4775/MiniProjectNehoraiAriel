@@ -3,22 +3,23 @@ import primitives.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-
+/**
+ * TODO
+ */
 public class Sphere extends Geometry{
     private Point3D _center;
     private double _radius;
 
     /**
      * constructor
-     * @param center
      * @param radius
+     * @param center
      */
-    public Sphere(Point3D center,double radius){
+    public Sphere(double radius, Point3D center){
 
         _center = center;
         if(radius==0)

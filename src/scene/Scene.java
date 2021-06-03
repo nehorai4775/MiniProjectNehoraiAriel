@@ -7,10 +7,10 @@ import primitives.*;
 import java.util.*;
 
 public class Scene {
-    public String _name;
-    public Color _background;
-    public AmbientLight _ambientLight;
-    public Geometries _geometries;
+    private final String _name;
+    public Color background=Color.BLACK;
+    public AmbientLight ambientLight=new AmbientLight();
+    public Geometries geometries=new Geometries();
     public List<LightSource> lights=new LinkedList<LightSource>();
 
     /**
@@ -28,11 +28,6 @@ public class Scene {
      */
     public Scene(String name) {
         _name=name;
-        _background=Color.BLACK;
-        _geometries= new Geometries();
-        _ambientLight=new AmbientLight();
-        lights=new LinkedList<LightSource>();
-
     }
 
     /**
@@ -41,7 +36,7 @@ public class Scene {
      * @return this
      */
     public Scene setBackground(Color background) {
-        this._background = background;
+        this.background = background;
         return this;
     }
 
@@ -51,7 +46,7 @@ public class Scene {
      * @return this
      */
     public Scene setAmbientLight(AmbientLight ambientLight) {
-        this._ambientLight = ambientLight;
+        this.ambientLight = ambientLight;
         return this;
     }
 
@@ -61,7 +56,7 @@ public class Scene {
      * @return this
      */
     public Scene setGeometries(Geometries geometries) {
-        this._geometries = geometries;
+        this.geometries = geometries;
         return this;
     }
 }
