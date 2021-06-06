@@ -4,6 +4,8 @@ import geometries.Intersectable.GeoPoint;
 
 import java.util.List;
 
+import static primitives.Util.alignZero;
+
 public class Ray {
 
     private static final double DELTA = 0.1;
@@ -12,10 +14,17 @@ public class Ray {
     private final  Point3D _p0;
     private final  Vector _dir;
 
-    public Ray(Point3D point, Vector v, Vector n) {
-        Vector delta = n.scale(n.dotProduct(v) > 0 ? DELTA : - DELTA);
-        _p0 = point.add(delta);
-        _dir = v;
+    public Ray(Point3D head, Vector direction, Vector normal) {
+        Vector delta;
+
+        if (alignZero(direction.dotProduct(normal)) > 0)
+            delta = normal.scale(DELTA);
+
+        else
+            delta = normal.scale(-DELTA);
+
+        this._dir = direction.normalized();
+        this._p0 = head.add(delta);
     }
 
     @Override

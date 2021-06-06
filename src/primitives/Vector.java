@@ -81,8 +81,16 @@ public class Vector {
      */
     //a function that multiplies a vector by a scalar
     public Vector scale(double num) {
-        Vector scaleVector =new Vector(new Point3D(head._x._coord*num,head._y._coord*num,head._z._coord*num));
-        return scaleVector;
+        if(num==0){
+            throw new IllegalArgumentException("Can not multiply by zero");
+        }
+        //Vector scaleVector =new Vector(new Point3D(head._x._coord*num,head._y._coord*num,head._z._coord*num));
+      //  return scaleVector;
+        double x = this.head._x._coord * num;
+        double y = this.head._y._coord * num;
+        double z = this.head._z._coord * num;
+
+        return new Vector(x, y, z);
     }
 
     /**

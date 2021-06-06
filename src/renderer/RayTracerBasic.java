@@ -69,13 +69,16 @@ public class RayTracerBasic extends RayTracerBase {
         Color color = Color.BLACK;
         Vector n = gp._geometry.getNormal(gp._point);
         Material material = gp._geometry.getMaterial();
+
         double kkr = k * material._kr;
         if (kkr > MIN_CALC_COLOR_K)
             color = calcGlobalEffect(ConstructingReflectedRay(v, n, gp._point), level, material._kr, kkr);
+
         double kkt = k * material._kt;
         if (kkt > MIN_CALC_COLOR_K)
-            color = color.add(
-                    calcGlobalEffect(ConstructingReflectedRay(v, n, gp._point), level, material._kt, kkt));
+            color = color.add(///Nehoray dbaaaaaaa, he used the reflected' not refracted
+                    calcGlobalEffect(ConstructingRefractedRay(v, n, gp._point), level, material._kt, kkt));
+
         return color;
     }
 
@@ -185,49 +188,20 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
 
-    /**
-     * Checks if the place is shaded or not
-     *
-     * @param l-       vector l
-     * @param n        -normal
-   //  * @param geoPoint -point
-     * @return is the place shaded
-     */
-  //  private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geoPoint) {
-//        Point3D point = geoPoint._point;
-//        Vector lightDirection = l.scale(-1); // from point to light source
-////        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : -DELTA);
-////        Point3D point = geoPoint._point.add(delta);
-//        Ray lightRay = new Ray(point, lightDirection, n);
-//        List<GeoPoint> intersections = _scene.geometries.findGeoIntersections(lightRay);
-//        if (intersections == null)
-//            return true;
-//
-//           //hesber
-//        double lightDistance = light.getDistance(point);
-//        for (GeoPoint gp : intersections) {
-//
-//            if (alignZero(light.getDistance((gp._point)) - lightDistance) <= 0 && gp._geometry.getMaterial()._kt == 0)
-//                return false;
-//        }
-//        return true;
-    //}
-        private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
-            Vector lightDirection = l.scale(-1); // from point to light source
-            Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : - DELTA);
-            Point3D point = geopoint._point.add(delta);
-            Ray lightRay = new Ray(point, lightDirection);
-            List<GeoPoint> intersections = _scene.geometries.findGeoIntersections(lightRay);
-            if (intersections == null) return true;
-            double lightDistance = light.getDistance(geopoint._point);
-            for (GeoPoint gp : intersections) {
-                if (alignZero(gp._point.distance(geopoint._point) - lightDistance) <= 0&& gp._geometry.getMaterial()._kt == 0)
-                    return false;
-            }
-            return true;
+    private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
+        Vector lightDirection = l.scale(-1); // from point to light source
+        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : - DELTA);
+        Point3D point = geopoint._point.add(delta);
+        Ray lightRay = new Ray(point, lightDirection);
+        List<GeoPoint> intersections = _scene.geometries.findGeoIntersections(lightRay);
+        if (intersections == null) return true;
+        double lightDistance = light.getDistance(geopoint._point);
+        for (GeoPoint gp : intersections) {
+            if (alignZero(gp._point.distance(geopoint._point) - lightDistance) <= 0&&gp._geometry.getMaterial()._kt==0)
+                return false;
         }
-
-
+        return true;
+    }
 
     /**
      * Constructing reflected ray
@@ -238,11 +212,11 @@ public class RayTracerBasic extends RayTracerBase {
      * @return ray
      */
     private Ray ConstructingReflectedRay(Vector v, Vector n, Point3D point) {
-//        Vector delta = n.scale(n.dotProduct(v) > 0 ? DELTA : -DELTA);
-//        Point3D _point = point.add(delta);
-//        return new Ray(_point, v.subtract((n.crossProduct(v.crossProduct(n))).scale(2)));
-        Vector r = v.subtract(n.scale(v.dotProduct(n)*2));
-        return new Ray(point,r,n);
+
+            Vector r = v.subtract(n.scale(2 * v.dotProduct(n)));
+
+            return new Ray(point, r, n);
+
     }
 
     /**
