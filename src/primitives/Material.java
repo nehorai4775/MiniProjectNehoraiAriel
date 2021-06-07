@@ -92,4 +92,13 @@ public class Material {
     public int getNshininess() {
         return _nshininess;
     }
+
+
+
+    public double getKt() {
+        return _kt;
+    }
+
 }
+
+

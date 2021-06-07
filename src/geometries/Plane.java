@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 //Plane class
@@ -93,7 +94,7 @@ public class Plane extends   Geometry{
             return null;
         if(_normal.dotProduct(ray.getDir())!=0)
         {
-            double t= (_normal.dotProduct(_q0.subtract(ray.getP0()))/_normal.dotProduct(ray.getDir()));
+            double t= alignZero(_normal.dotProduct(_q0.subtract(ray.getP0()))/_normal.dotProduct(ray.getDir()));
             if(t>0)
             {
                 List<GeoPoint> points=new ArrayList<GeoPoint>();
