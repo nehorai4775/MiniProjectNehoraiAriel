@@ -47,6 +47,5 @@ public class MyTest {
                 .setRayTracer(new RayTracerBasic(scene));
         render.renderImage(true);
         render.writeToImage();
-
     }
 }
