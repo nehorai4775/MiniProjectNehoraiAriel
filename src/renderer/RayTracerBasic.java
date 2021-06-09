@@ -134,12 +134,13 @@ public class RayTracerBasic extends RayTracerBase {
                                 calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                     }
                 }
-                return color;
+
             } else if (softShadow == true) {//if we want use in soft shadow
                 /**
                  * vectors around the light source
                  */
                 List<Vector> vectorsL = lightSource.getL2(point);
+                Color helpC = Color.BLACK;
                 for (Vector l : vectorsL) {
                     double nl = alignZero(n.dotProduct(l));
                     if (nl * nv > 0) { // sign(nl) == sing(nv)
@@ -148,17 +149,21 @@ public class RayTracerBasic extends RayTracerBase {
                         if (ktr * k > MIN_CALC_COLOR_K) {
 
                             Color lightIntensity = lightSource.getIntensity(geoPoint._point).scale(ktr);
-                            color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+                            helpC = helpC.add(calcDiffusive(kd, l, n, lightIntensity),
                                     calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                         }
                     }
                 }
+                /**
+                 * We divide the color each time by the number of rays
+                 */
+                helpC = helpC.reduce(rays);
+                color = color.add(helpC);
             }
 
         }
-        //We divide a color because we calculated the color of all the rays
-        Color ColorFinal = color.reduce(rays);
-        return ColorFinal;
+
+        return color;
 
     }
 

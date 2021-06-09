@@ -44,6 +44,9 @@ public class DirectionalLight extends Light implements LightSource  {
         return Double.POSITIVE_INFINITY;
     }
 
+    /*
+    in direction light we shouldn't do soft shadow
+     */
     @Override
     public List<Vector> getL2(Point3D p) {
         return null;

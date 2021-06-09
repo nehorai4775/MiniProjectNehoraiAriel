@@ -45,7 +45,7 @@ public class MyTest {
                 .setImageWriter(new ImageWriter("MyTests", 500, 500)) //
                 .setCamera(camera) //
                 .setRayTracer(new RayTracerBasic(scene));
-        render.renderImage(false);
+        render.renderImage(true);
         render.writeToImage();
 
     }

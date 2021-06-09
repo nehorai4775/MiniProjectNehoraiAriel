@@ -12,11 +12,11 @@ import java.util.Random;
 public class PointLight extends Light implements LightSource {
     private Point3D _position;
     private double _kc, _kl, _kq;
-    private int LengthOfTheSide = 1;
+    private double LengthOfTheSide = 1;
     /**
      * rays that get out from a point
      */
-    public static final int rays = 16;
+    public static final int rays = 100;
 
 
     /**
@@ -118,10 +118,7 @@ public class PointLight extends Light implements LightSource {
  * A variable that tells how many divide each side
  */
         double divided = Math.sqrt(rays);
-        Random random = new Random();
-        double rand;
-        int min = 1;
-        int max = 2;
+
 /**
  * plane of the light
  */
@@ -131,16 +128,17 @@ public class PointLight extends Light implements LightSource {
          */
         List<Vector> vectorsOfThePlane = findVectorsOfPlane(plane);
         /**
-         * start point
+         * Starting point of the square around the lighting
          */
-        Point3D startPoint = _position.add(vectorsOfThePlane.get(0).normalize().scale(-2)).add(vectorsOfThePlane.get(1).normalize().scale(-2));
+        Point3D startPoint = _position.add(vectorsOfThePlane.get(0).normalize().scale(-LengthOfTheSide/2))
+                .add(vectorsOfThePlane.get(1).normalize().scale(-LengthOfTheSide/2));
 
         /**
          * A loop that runs as the number of vectors and in each of its runs it brings a vector around the lamp
          */
         for (double i = 0; i < LengthOfTheSide; i += LengthOfTheSide / divided) {
             for (double j = 0; j < LengthOfTheSide; j += LengthOfTheSide / divided) {
-                Vector l = p.subtract(startPoint.add(vectorsOfThePlane.get(0).normalize().scale(randomDouble(i, i + LengthOfTheSide / divided))).add(vectorsOfThePlane.get(1).normalize().scale(randomDouble(j, j + LengthOfTheSide / divided))));
+                Vector l = p.subtract(startPoint.add(vectorsOfThePlane.get(0).normalize().scale(randomDouble(i, i + LengthOfTheSide / divided))).add(vectorsOfThePlane.get(1).normalize().scale(randomDouble(j, j + LengthOfTheSide / divided)))).normalize();
                 vectors.add(l);
             }
 
@@ -161,7 +159,7 @@ public class PointLight extends Light implements LightSource {
         //we calculate a point on the plane and then we create a vector with the point
         if (plane.getNormal().getHead().getX().getCoord() != 0) {
             double x1 = (d / plane.getNormal().getHead().getX().getCoord());
-            Vector l1 = plane.getQ0().subtract(new Point3D(x1, 0, 0));
+            Vector l1 = (new Point3D(x1, 0, 0)).subtract(plane.getQ0());
             vectors.add(l1);
             amount++;
         }
@@ -169,7 +167,7 @@ public class PointLight extends Light implements LightSource {
 
         if (plane.getNormal().getHead().getY().getCoord() != 0) {
             double y2 = (d / plane.getNormal().getHead().getY().getCoord());
-            Vector l2 = plane.getQ0().subtract(new Point3D(0, y2, 0));
+            Vector l2 = (new Point3D(0, y2, 0)).subtract(plane.getQ0());
             vectors.add(l2);
             amount++;
         }
@@ -177,7 +175,7 @@ public class PointLight extends Light implements LightSource {
 
         if (plane.getNormal().getHead().getZ().getCoord() != 0 && amount < 2) {
             double z3 = (d / plane.getNormal().getHead().getY().getCoord());
-            Vector l3 = plane.getQ0().subtract(new Point3D(0, 0, z3));
+            Vector l3 = (new Point3D(0, 0, z3)).subtract(plane.getQ0());
             vectors.add(l3);
             amount++;
         }
@@ -192,6 +190,10 @@ public class PointLight extends Light implements LightSource {
      * @return random number in particular field
      */
     public double randomDouble(double min, double max) {
-        return min + (max - min) * new Random().nextDouble();
+        double rand=min + (max - min) * new Random().nextDouble();
+        if(rand==min||rand==max){
+            return randomDouble(min, max);
+        }
+        return rand;
     }
 }
