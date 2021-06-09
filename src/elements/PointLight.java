@@ -1,12 +1,22 @@
 package elements;
 
+import geometries.Plane;
 import primitives.Color;
 import primitives.Point3D;
 import primitives.Vector;
 
+import java.util.List;
+import java.util.Random;
+
 public class PointLight extends Light implements LightSource{
     private Point3D _position;
     private double _kc, _kl, _kq;
+    private int LengthOfTheSide;
+    /**
+     * rays that get out from a point
+     */
+    private static final int rays = 16;
+
 
     /**
      * constructor
@@ -86,5 +96,33 @@ public class PointLight extends Light implements LightSource{
      */
     public double getDistance(Point3D point){
        return _position.distance(point);
+    }
+
+    @Override
+    public List<Vector> getL2(Point3D p) {
+List<Vector> vectors =null;
+
+double divided=Math.sqrt(rays);
+Point3D StartPoint=_position.add(new Vector(-divided/2,-divided/2,-divided/2));
+Random random = new Random();
+double rand;
+int min = 1;
+int max = 2;
+Plane plane=new Plane(_position,getL(p));
+for (int i=0;i<divided;++i){
+    rand = min + (max-min)*random.nextInt();
+    Vector l1=p.subtract(StartPoint.add(new Vector(0,0,(LengthOfTheSide/divided)*i)));
+    Vector l2=p.subtract(StartPoint.add(new Vector(0,(LengthOfTheSide/divided)*i,0)));
+    Vector l3=p.subtract(StartPoint.add(new Vector((LengthOfTheSide/divided)*i,0,0)));
+
+    vectors.addAll(List.of(l1,l2,l3));
+}
+for(int i=0;i<16;++i){
+    for(int j=0;j<16;++j){
+        Vector l1=p.subtract(plane.)
+    }
+
+}
+return vectors;
     }
 }

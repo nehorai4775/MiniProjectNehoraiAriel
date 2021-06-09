@@ -20,6 +20,8 @@ public class RayTracerBasic extends RayTracerBase {
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
     private static final double INITIAL_K = 1.0;
+    private static final Boolean softShadow = true;
+
 
 
     //constructor
@@ -116,19 +118,37 @@ public class RayTracerBasic extends RayTracerBase {
         int nShininess = material.getNshininess();
         double kd = material.getKd(), ks = material.getKs();
         Color color = Color.BLACK;
-        for (var lightSource : _scene.lights) {
-            Vector l = lightSource.getL(point);
-            double nl = alignZero(n.dotProduct(l));
-            if (nl * nv > 0) { // sign(nl) == sing(nv)
-              //  if (unshaded(lightSource, l, n, geoPoint)) {
-                double ktr =transparency(lightSource, l, n, geoPoint);
-                if (ktr * k > MIN_CALC_COLOR_K){
 
-                    Color lightIntensity = lightSource.getIntensity(geoPoint._point).scale(ktr);
-                    color = color.add(calcDiffusive(kd, l, n, lightIntensity),
-                            calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+        for (var lightSource : _scene.lights) {
+            if(softShadow!=true){
+                Vector l = lightSource.getL(point);
+                double nl = alignZero(n.dotProduct(l));
+                if (nl * nv > 0) { // sign(nl) == sing(nv)
+                    //  if (unshaded(lightSource, l, n, geoPoint)) {
+                    double ktr =transparency(lightSource, l, n, geoPoint);
+                    if (ktr * k > MIN_CALC_COLOR_K){
+
+                        Color lightIntensity = lightSource.getIntensity(geoPoint._point).scale(ktr);
+                        color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+                                calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                    }
+                } }
+            else if(softShadow==true){
+            List<Vector> vectorsL=lightSource.getL2(point);
+            for (Vector l:vectorsL) {
+                double nl = alignZero(n.dotProduct(l));
+                if (nl * nv > 0) { // sign(nl) == sing(nv)
+                    //  if (unshaded(lightSource, l, n, geoPoint)) {
+                    double ktr =transparency(lightSource, l, n, geoPoint);
+                    if (ktr * k > MIN_CALC_COLOR_K){
+
+                        Color lightIntensity = lightSource.getIntensity(geoPoint._point).scale(ktr);
+                        color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+                                calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                    }}
                 }
             }
+
         }
         return color;
     }
