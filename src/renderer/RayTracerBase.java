@@ -10,5 +10,5 @@ public abstract class RayTracerBase {
         _scene = scene;
     }
 //We implement the function in the RayTracerBasic
-    public abstract Color traceRay(Ray ray);
+    public abstract Color traceRay(Ray ray,boolean softShadow);
 }

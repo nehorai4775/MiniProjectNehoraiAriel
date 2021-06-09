@@ -45,7 +45,7 @@ class LightsTests {
                 .setImageWriter(imageWriter) //
                 .setCamera(camera1) //
                 .setRayTracer(new RayTracerBasic(scene1));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
 
@@ -63,7 +63,7 @@ class LightsTests {
                 .setImageWriter(imageWriter) //
                 .setCamera(camera1) //
                 .setRayTracer(new RayTracerBasic(scene1));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
 
@@ -81,7 +81,7 @@ class LightsTests {
                 .setImageWriter(imageWriter) //
                 .setCamera(camera1) //
                 .setRayTracer(new RayTracerBasic(scene1));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
 
@@ -99,7 +99,7 @@ class LightsTests {
                 .setImageWriter(imageWriter) //
                 .setCamera(camera2) //
                 .setRayTracer(new RayTracerBasic(scene2));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
 
@@ -118,7 +118,7 @@ class LightsTests {
                 .setImageWriter(imageWriter) //
                 .setCamera(camera2) //
                 .setRayTracer(new RayTracerBasic(scene2));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
 
@@ -137,7 +137,7 @@ class LightsTests {
                 .setImageWriter(imageWriter) //
                 .setCamera(camera2) //
                 .setRayTracer(new RayTracerBasic(scene2));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
 /////
@@ -157,7 +157,7 @@ public void spectacular_sphere() {
             .setImageWriter(imageWriter) //
             .setCamera(camera1) //
             .setRayTracer(new RayTracerBasic(scene1));
-    render.renderImage();
+    render.renderImage(false);
     render.writeToImage();
 }
 
@@ -183,7 +183,7 @@ public void spectacular_sphere() {
                 .setImageWriter(imageWriter) //
                 .setCamera(camera2) //
                 .setRayTracer(new RayTracerBasic(scene2));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
 

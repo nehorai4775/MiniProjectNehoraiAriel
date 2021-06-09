@@ -47,7 +47,7 @@ public class Render {
       for each pixel that builds a beam and for each beam we get a color from the horn comb.
       Name the color in the appropriate pixel of the image maker (writePixel)
      */
-    public void renderImage(){
+    public void renderImage(boolean softShadow){
         if(_camera==null)//Failure to enter data throws error
             throw new MissingResourceException("there isn't have a value in camera","camera",null);
         if(_imageWriter==null)
@@ -55,7 +55,7 @@ public class Render {
         for(int i=0;i<_imageWriter.getNx();++i)//For each pixel we calculate the color it should be painted
             for (int j=0;j<_imageWriter.getNy();++j){
                 Ray ray=_camera.constructRayThroughPixel(_imageWriter.getNx(),_imageWriter.getNy(),i,j);
-                Color color= _rayTracer.traceRay(ray);
+                Color color= _rayTracer.traceRay(ray,softShadow);
                 _imageWriter.writePixel(i,j,color);
             }
     }

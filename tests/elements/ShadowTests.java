@@ -39,7 +39,7 @@ public class ShadowTests {
                 setImageWriter(new ImageWriter("shadowSphereTriangleInitial", 400, 400)) //
                 .setCamera(camera) //
                 .setRayTracer(new RayTracerBasic(scene));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
 
@@ -68,7 +68,7 @@ public class ShadowTests {
                 .setImageWriter(new ImageWriter("shadowTrianglesSphere", 600, 600)) //
                 .setCamera(camera) //
                 .setRayTracer(new RayTracerBasic(scene));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
     @Test
@@ -89,7 +89,7 @@ public class ShadowTests {
                 setImageWriter(new ImageWriter("shadowSphereTriangleInitial1", 400, 400)) //
                 .setCamera(camera) //
                 .setRayTracer(new RayTracerBasic(scene));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
     @Test
@@ -110,7 +110,7 @@ public class ShadowTests {
                 setImageWriter(new ImageWriter("shadowSphereTriangleInitial2", 400, 400)) //
                 .setCamera(camera) //
                 .setRayTracer(new RayTracerBasic(scene));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
     /**
@@ -134,7 +134,7 @@ public class ShadowTests {
                 setImageWriter(new ImageWriter("shadowSphereTriangleInitial3", 400, 400)) //
                 .setCamera(camera) //
                 .setRayTracer(new RayTracerBasic(scene));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
     /**
@@ -160,7 +160,7 @@ public class ShadowTests {
                 setImageWriter(new ImageWriter("shadowSphereTriangleInitial4", 400, 400)) //
                 .setCamera(camera) //
                 .setRayTracer(new RayTracerBasic(scene));
-        render.renderImage();
+        render.renderImage(false);
         render.writeToImage();
     }
 }
