@@ -31,19 +31,11 @@ public class MyTest {
                         .setMaterial(new Material().setKd(0.8).setKs(0.2).setShininess(300).setKt(0.5)),
 
 
-                new Sphere(0.25,new Point3D(0,-1,0.5))
+                new Sphere(0.5,new Point3D(0,-1,0.5))
                         .setEmission(new Color(0,200,0)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.5)),
 
-                new Sphere(0.25,new Point3D(0.4,0.53,0.37))
-                        .setEmission(new Color(200,0,0)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.3)),
-
-        new Sphere(0.25,new Point3D(0.4,-0.53,0.37))
-                .setEmission(new Color(200,200,0)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.3)),
-
-
-        new Sphere(0.25,new Point3D(0,1,0.5))
-                .setEmission(new Color(200,0,200)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.3))
-
+                new Sphere(0.5,new Point3D(0,1,0.5))
+                        .setEmission(new Color(200,0,0)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.3))
 
 
                 );
