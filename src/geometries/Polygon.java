@@ -2,7 +2,9 @@ package geometries;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import primitives.*;
+
 import static primitives.Util.*;
 
 /**
@@ -88,26 +90,23 @@ public class Polygon extends Geometry {
     }
 
 
-
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray) {
 
-        if(ray.getP0().equals(plane.getQ0()))//if p0 is q0 return null
+        if (ray.getP0().equals(plane.getQ0()))//if p0 is q0 return null
             return null;
-        else
-        {
-            List<GeoPoint> pointIntersection=plane.findGeoIntersections(ray);//we find the intersections with the plane
-            if(pointIntersection!=null)
-                pointIntersection.get(0)._geometry=this;
-            for(int i=0;i<vertices.size()-2;++i)
-            {
+        else {
+            List<GeoPoint> pointIntersection = plane.findGeoIntersections(ray);//we find the intersections with the plane
+            if (pointIntersection != null)
+                pointIntersection.get(0)._geometry = this;
+            for (int i = 0; i < vertices.size() - 2; ++i) {
                 Vector v1 = vertices.get(i).subtract(ray.getP0());
-                Vector v2 = vertices.get(i+1).subtract(ray.getP0());
-                Vector v3 = vertices.get(i+2).subtract(ray.getP0());
+                Vector v2 = vertices.get(i + 1).subtract(ray.getP0());
+                Vector v3 = vertices.get(i + 2).subtract(ray.getP0());
                 Vector n1 = (v1.crossProduct(v2)).normalize();
                 Vector n2 = (v2.crossProduct(v3)).normalize();
                 Vector n3 = (v3.crossProduct(v1)).normalize();
-                if (((ray.getDir().dotProduct(n1))>0&& (ray.getDir().dotProduct(n2)>0 && (ray.getDir().dotProduct(n3))>0)||(ray.getDir().dotProduct(n1))<0&& (ray.getDir().dotProduct(n2)<0 && (ray.getDir().dotProduct(n3))<0)))
+                if (((ray.getDir().dotProduct(n1)) > 0 && (ray.getDir().dotProduct(n2) > 0 && (ray.getDir().dotProduct(n3)) > 0) || (ray.getDir().dotProduct(n1)) < 0 && (ray.getDir().dotProduct(n2) < 0 && (ray.getDir().dotProduct(n3)) < 0)))
                     return pointIntersection;//if is is in the polygon we return the point
             }
             return null;

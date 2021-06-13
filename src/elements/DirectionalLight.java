@@ -6,7 +6,10 @@ import primitives.Vector;
 
 import java.util.List;
 
-public class DirectionalLight extends Light implements LightSource  {
+/**
+ * a class for direction light
+ */
+public class DirectionalLight extends Light implements LightSource {
     private Vector _direction;
 
     /**
@@ -15,13 +18,14 @@ public class DirectionalLight extends Light implements LightSource  {
      * @param intensity -intensity of the light
      * @param direction - vector direction
      */
-    protected DirectionalLight(Color intensity,Vector direction) {
+    protected DirectionalLight(Color intensity, Vector direction) {
         super(intensity);
-        _direction=direction;
+        _direction = direction;
     }
 
     /**
      * getter
+     *
      * @param p-point
      * @return intensity
      */
@@ -37,10 +41,11 @@ public class DirectionalLight extends Light implements LightSource  {
 
     /**
      * getter
-     * @param point
+     *
+     * @param point-point
      * @return Double.POSITIVE_INFINITY
      */
-    public double getDistance(Point3D point){
+    public double getDistance(Point3D point) {
         return Double.POSITIVE_INFINITY;
     }
 

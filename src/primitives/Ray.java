@@ -6,13 +6,16 @@ import java.util.List;
 
 import static primitives.Util.alignZero;
 
+/**
+ * a class for ray
+ */
 public class Ray {
 
     private static final double DELTA = 0.1;
 
 
-    private final  Point3D _p0;
-    private final  Vector _dir;
+    private final Point3D _p0;
+    private final Vector _dir;
 
     public Ray(Point3D head, Vector direction, Vector normal) {
         Vector delta;
@@ -71,9 +74,10 @@ public class Ray {
                 closestPoint = list.get(i);
             }
         }
-return closestPoint;
+        return closestPoint;
     }
-    public GeoPoint findGeoClosestPoint(List < GeoPoint > list) {
+
+    public GeoPoint findGeoClosestPoint(List<GeoPoint> list) {
         GeoPoint closestGeoPoint = null;//the closest point
         double min = 0;//minimum distance
         for (int i = 0; i < list.size(); ++i) {//I go over all the points

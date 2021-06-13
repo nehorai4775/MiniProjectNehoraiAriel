@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * interface for intersectable
+ */
 public interface Intersectable {
     List<GeoPoint> findGeoIntersections(Ray ray);
 
@@ -30,13 +33,13 @@ public interface Intersectable {
             GeoPoint geoPoint = (GeoPoint) o;
             return Objects.equals(_geometry, geoPoint._geometry) && Objects.equals(_point, geoPoint._point);
         }
-         }
-        default List<Point3D> findIntersections(Ray ray) {
-            var geoList = findGeoIntersections(ray);
-            return geoList == null ? null
-                    : geoList.stream().map(gp -> gp._point).collect(Collectors.toList());
-        }
+    }
 
+    default List<Point3D> findIntersections(Ray ray) {
+        var geoList = findGeoIntersections(ray);
+        return geoList == null ? null
+                : geoList.stream().map(gp -> gp._point).collect(Collectors.toList());
+    }
 
 
 }

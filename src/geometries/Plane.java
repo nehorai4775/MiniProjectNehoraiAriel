@@ -1,4 +1,5 @@
 package geometries;
+
 import primitives.*;
 
 import java.util.ArrayList;
@@ -8,25 +9,27 @@ import java.util.Objects;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-//Plane class
-public class Plane extends   Geometry{
-    private  Point3D _q0;
+/**
+ * Plane class
+ */
+public class Plane extends Geometry {
+    private Point3D _q0;
     private Vector _normal;
 
     /**
      * contractor,makes a Plane from three points
-     * @param a
-     * @param b
-     * @param c
+     *
+     * @param a-point 1
+     * @param b-point 2
+     * @param c-point 3
      */
-    public Plane(Point3D a,Point3D b,Point3D c)
-    {
+    public Plane(Point3D a, Point3D b, Point3D c) {
 
 
         Vector v1 = a.subtract(b);
         Vector v2 = b.subtract(c);
 
-            Vector v3 = v1.crossProduct(v2);
+        Vector v3 = v1.crossProduct(v2);
 
 
         _q0 = a;
@@ -35,37 +38,40 @@ public class Plane extends   Geometry{
     }
 
     /**
-     *  contractor,makes a Plane from one point and one vector
-     * @param a
-     * @param v
+     * contractor,makes a Plane from one point and one vector
+     *
+     * @param a-point
+     * @param v-vector
      */
-    public Plane(Point3D a,Vector v)
-    {
+    public Plane(Point3D a, Vector v) {
         _normal = v.normalize();
         _q0 = a;
     }
 
     /**
      * getter
-     * @param s
+     *
+     * @param s-point
      * @return the normal by a point
      */
-    public Vector getNormal(Point3D s){
+    public Vector getNormal(Point3D s) {
 
         return _normal;
     }
 
     /**
      * getter
+     *
      * @return the normal
      */
-    public Vector getNormal(){
+    public Vector getNormal() {
 
         return _normal;
     }
 
     /**
      * getter
+     *
      * @return q0
      */
     public Point3D getQ0() {
@@ -90,22 +96,18 @@ public class Plane extends   Geometry{
 
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray) {
-        if(isZero(ray.getP0().getX().getCoord()-_q0.getX().getCoord())&&isZero(ray.getP0().getY().getCoord()-_q0.getY().getCoord())&&isZero(ray.getP0().getZ().getCoord()-_q0.getZ().getCoord()))
+        if (isZero(ray.getP0().getX().getCoord() - _q0.getX().getCoord()) && isZero(ray.getP0().getY().getCoord() - _q0.getY().getCoord()) && isZero(ray.getP0().getZ().getCoord() - _q0.getZ().getCoord()))
             return null;
-        if(_normal.dotProduct(ray.getDir())!=0)
-        {
-            double t= alignZero(_normal.dotProduct(_q0.subtract(ray.getP0()))/_normal.dotProduct(ray.getDir()));
-            if(t>0)
-            {
-                List<GeoPoint> points=new ArrayList<GeoPoint>();
-                GeoPoint temp=new GeoPoint(this,ray.getPoint(t));
+        if (_normal.dotProduct(ray.getDir()) != 0) {
+            double t = alignZero(_normal.dotProduct(_q0.subtract(ray.getP0())) / _normal.dotProduct(ray.getDir()));
+            if (t > 0) {
+                List<GeoPoint> points = new ArrayList<GeoPoint>();
+                GeoPoint temp = new GeoPoint(this, ray.getPoint(t));
                 points.add(temp);
                 return points;
-            }
-            else
+            } else
                 return null;
-        }
-        else
+        } else
             return null;
 
     }

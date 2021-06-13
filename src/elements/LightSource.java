@@ -10,6 +10,7 @@ import java.util.List;
 public interface LightSource {
     /**
      * getter
+     *
      * @param p-point
      * @return intensity
      */
@@ -17,10 +18,13 @@ public interface LightSource {
 
     /**
      * getter
+     *
      * @param p-point
      * @return vector L
      */
     public Vector getL(Point3D p);
+
     double getDistance(Point3D point);
+
     public List<Vector> getL2(Point3D p);
 }

@@ -6,15 +6,19 @@ import primitives.*;
 
 import java.util.*;
 
+/**
+ * a class for scene
+ */
 public class Scene {
     private final String _name;
-    public Color background=Color.BLACK;
-    public AmbientLight ambientLight=new AmbientLight();
-    public Geometries geometries=new Geometries();
-    public List<LightSource> lights=new LinkedList<LightSource>();
+    public Color background = Color.BLACK;
+    public AmbientLight ambientLight = new AmbientLight();
+    public Geometries geometries = new Geometries();
+    public List<LightSource> lights = new LinkedList<LightSource>();
 
     /**
      * setter
+     *
      * @param lights - list of light
      */
     public Scene setLights(List<LightSource> lights) {
@@ -24,14 +28,16 @@ public class Scene {
 
     /**
      * constructor
-     * @param name
+     *
+     * @param name-name
      */
     public Scene(String name) {
-        _name=name;
+        _name = name;
     }
 
     /**
      * setter
+     *
      * @param background- color of background
      * @return this
      */
@@ -42,7 +48,8 @@ public class Scene {
 
     /**
      * setter
-     * @param ambientLight
+     *
+     * @param ambientLight-ambient light
      * @return this
      */
     public Scene setAmbientLight(AmbientLight ambientLight) {
@@ -52,7 +59,8 @@ public class Scene {
 
     /**
      * setter
-     * @param geometries
+     *
+     * @param geometries -geometries
      * @return this
      */
     public Scene setGeometries(Geometries geometries) {

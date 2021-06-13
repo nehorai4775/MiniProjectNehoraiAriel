@@ -1,24 +1,28 @@
 package primitives;
 
+/**
+ * a class for material
+ */
 public class Material {
-    public double _Kd,_Ks;
+    public double _Kd, _Ks;
     public int _nshininess;
     /**
      * kt-Promotes transparency
      * kr-Coefficient of reflection
      */
-    public double _kt,_kr;
+    public double _kt, _kr;
 
     public Material() {
-        _Kd=0;
-        _Ks=0;
-        _nshininess=0;
-        _kr=0.0;
-        _kt=0.0;
+        _Kd = 0;
+        _Ks = 0;
+        _nshininess = 0;
+        _kr = 0.0;
+        _kt = 0.0;
     }
 
     /**
      * setter
+     *
      * @param kt-Promotes transparency
      * @return this
      */
@@ -29,6 +33,7 @@ public class Material {
 
     /**
      * setter
+     *
      * @param kr-Coefficient of reflection
      * @return this
      */
@@ -39,6 +44,7 @@ public class Material {
 
     /**
      * setter
+     *
      * @param kd
      * @return this
      */
@@ -49,6 +55,7 @@ public class Material {
 
     /**
      * setter
+     *
      * @param ks
      * @return this
      */
@@ -60,6 +67,7 @@ public class Material {
 
     /**
      * setter
+     *
      * @param nshininess
      * @return this
      */
@@ -71,6 +79,7 @@ public class Material {
 
     /**
      * getter
+     *
      * @return kd
      */
     public double getKd() {
@@ -79,6 +88,7 @@ public class Material {
 
     /**
      * getter
+     *
      * @return ks
      */
     public double getKs() {
@@ -87,12 +97,12 @@ public class Material {
 
     /**
      * getter
+     *
      * @return nshininess
      */
     public int getNshininess() {
         return _nshininess;
     }
-
 
 
     public double getKt() {

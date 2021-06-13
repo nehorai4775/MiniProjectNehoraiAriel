@@ -13,6 +13,9 @@ import java.util.List;
 import static elements.PointLight.rays;
 import static primitives.Util.alignZero;
 
+/**
+ * a class for basic ray tracer
+ */
 public class RayTracerBasic extends RayTracerBase {
     /**
      * Fixed for size moving first rays for shading rays
@@ -24,7 +27,6 @@ public class RayTracerBasic extends RayTracerBase {
     private static final double INITIAL_K = 1.0;
 
 
-
     //constructor
     public RayTracerBasic(Scene scene) {
         super(scene);
@@ -33,27 +35,27 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * calculate color recursive
      *
-     * @param point
-     * @param ray
-     * @param level
+     * @param point   -geo point
+     * @param ray-ray
+     * @param level   -level
      * @param k
      * @return color
      */
-    public Color calcColor(GeoPoint point, Ray ray, int level, double k,boolean softShadow) {
+    public Color calcColor(GeoPoint point, Ray ray, int level, double k, boolean softShadow) {
         Color color = point._geometry.getEmission();
-        color = color.add(calcLocalEffects(point, ray, k,softShadow));
-        return 1 == level ? color : color.add(calcGlobalEffects(point, ray.getDir(), level, k,softShadow));
+        color = color.add(calcLocalEffects(point, ray, k, softShadow));
+        return 1 == level ? color : color.add(calcGlobalEffects(point, ray.getDir(), level, k, softShadow));
     }
 
     /**
      * calculate color
      *
-     * @param gp
-     * @param ray
+     * @param gp-geo  point
+     * @param ray-ray
      * @return color
      */
-    private Color calcColor(GeoPoint gp, Ray ray,boolean softShadow) {
-        return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K,softShadow)
+    private Color calcColor(GeoPoint gp, Ray ray, boolean softShadow) {
+        return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K, softShadow)
                 .add(_scene.ambientLight.getIntensity());
 
     }
@@ -62,25 +64,25 @@ public class RayTracerBasic extends RayTracerBase {
      * according to the presentation
      * calculate the global effects
      *
-     * @param gp
-     * @param v
-     * @param level
+     * @param gp-geo point
+     * @param v      -vector v
+     * @param level  -level
      * @param k
      * @return color
      */
-    private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, double k,boolean softShadow) {
+    private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, double k, boolean softShadow) {
         Color color = Color.BLACK;
         Vector n = gp._geometry.getNormal(gp._point);
         Material material = gp._geometry.getMaterial();
 
         double kkr = k * material._kr;
         if (kkr > MIN_CALC_COLOR_K)
-            color = calcGlobalEffect(ConstructingReflectedRay(v, n, gp._point), level, material._kr, kkr,softShadow);
+            color = calcGlobalEffect(ConstructingReflectedRay(v, n, gp._point), level, material._kr, kkr, softShadow);
 
         double kkt = k * material._kt;
         if (kkt > MIN_CALC_COLOR_K)
             color = color.add(
-                    calcGlobalEffect(ConstructingRefractedRay(v, n, gp._point), level, material._kt, kkt,softShadow));
+                    calcGlobalEffect(ConstructingRefractedRay(v, n, gp._point), level, material._kt, kkt, softShadow));
 
         return color;
     }
@@ -89,15 +91,15 @@ public class RayTracerBasic extends RayTracerBase {
      * according to the presentation
      * calculate global effects recursive
      *
-     * @param ray
-     * @param level
+     * @param ray-ray
+     * @param level   -level
      * @param kx
      * @param kkx
      * @return color
      */
-    private Color calcGlobalEffect(Ray ray, int level, double kx, double kkx,boolean softShadow) {
+    private Color calcGlobalEffect(Ray ray, int level, double kx, double kkx, boolean softShadow) {
         GeoPoint gp = findClosestIntersection(ray);
-        return (gp == null ? _scene.background : calcColor(gp, ray, level - 1, kkx,softShadow)
+        return (gp == null ? _scene.background : calcColor(gp, ray, level - 1, kkx, softShadow)
                 .scale(kx));
     }
 
@@ -108,7 +110,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @param ray-     the ray that cut
      * @return color
      */
-    private Color calcLocalEffects(GeoPoint geoPoint, Ray ray, double k,boolean softShadow) {
+    private Color calcLocalEffects(GeoPoint geoPoint, Ray ray, double k, boolean softShadow) {
         Point3D point = geoPoint._point;
         Vector v = ray.getDir();
         Vector n = geoPoint._geometry.getNormal(point);
@@ -122,7 +124,7 @@ public class RayTracerBasic extends RayTracerBase {
 
         for (var lightSource : _scene.lights) {
             //if we don't want use in soft shadow
-            if (softShadow != true) {
+            if (!softShadow || lightSource.getClass() == DirectionalLight.class) {
                 Vector l = lightSource.getL(point);
                 double nl = alignZero(n.dotProduct(l));
                 if (nl * nv > 0) { // sign(nl) == sing(nv)
@@ -136,12 +138,15 @@ public class RayTracerBasic extends RayTracerBase {
                     }
                 }
 
-            } else if (softShadow == true) {//if we want use in soft shadow
+            } else if (softShadow) {//if we want use in soft shadow
                 /**
                  * vectors around the light source
                  */
-                if (lightSource.getClass() == DirectionalLight.class) {
-                    Vector l = lightSource.getL(point);
+
+
+                List<Vector> vectorsL = lightSource.getL2(point);
+                Color helpC = Color.BLACK;
+                for (Vector l : vectorsL) {
                     double nl = alignZero(n.dotProduct(l));
                     if (nl * nv > 0) { // sign(nl) == sing(nv)
                         //  if (unshaded(lightSource, l, n, geoPoint)) {
@@ -149,29 +154,11 @@ public class RayTracerBasic extends RayTracerBase {
                         if (ktr * k > MIN_CALC_COLOR_K) {
 
                             Color lightIntensity = lightSource.getIntensity(geoPoint._point).scale(ktr);
-                            color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+                            helpC = helpC.add(calcDiffusive(kd, l, n, lightIntensity),
                                     calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                         }
                     }
-                } else {
 
-                    List<Vector> vectorsL = lightSource.getL2(point);
-                    Color helpC = Color.BLACK;
-
-
-                    for (Vector l : vectorsL) {
-                        double nl = alignZero(n.dotProduct(l));
-                        if (nl * nv > 0) { // sign(nl) == sing(nv)
-                            //  if (unshaded(lightSource, l, n, geoPoint)) {
-                            double ktr = transparency(lightSource, l, n, geoPoint);
-                            if (ktr * k > MIN_CALC_COLOR_K) {
-
-                                Color lightIntensity = lightSource.getIntensity(geoPoint._point).scale(ktr);
-                                helpC = helpC.add(calcDiffusive(kd, l, n, lightIntensity),
-                                        calcSpecular(ks, l, n, v, nShininess, lightIntensity));
-                            }
-                        }
-                    }
                     /**
                      * We divide the color each time by the number of rays
                      */
@@ -189,8 +176,8 @@ public class RayTracerBasic extends RayTracerBase {
      * calculate the diffusive
      *
      * @param kd
-     * @param l
-     * @param n
+     * @param l-vector l
+     * @param n-vector normal
      * @param LI
      * @return The color calculated
      */
@@ -203,9 +190,9 @@ public class RayTracerBasic extends RayTracerBase {
      * calculate the specular
      *
      * @param ks
-     * @param l
-     * @param n
-     * @param v
+     * @param l-       vector l
+     * @param n-vector n
+     * @param v-vector v
      * @param nShin
      * @param LI
      * @return The color calculated
@@ -218,28 +205,27 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * find the closest intersection
      *
-     * @param ray
-     * @return
+     * @param ray-ray
+     * @return geo point
      */
     private GeoPoint findClosestIntersection(Ray ray) {
         List<GeoPoint> intersections = _scene.geometries.findGeoIntersections(ray);
         if (intersections.isEmpty() || intersections == null)
             return null;
-        GeoPoint point = ray.findGeoClosestPoint(intersections);
-        return point;
+        return ray.findGeoClosestPoint(intersections);
     }
 
     /**
      * Calculate the color at the point of intersection with the beam
      *
-     * @param ray
-     * @return color
+     * @param ray-ray
+     * @return color-color
      */
     @Override
-    public Color traceRay(Ray ray,boolean softShadow) {
+    public Color traceRay(Ray ray, boolean softShadow) {
 
         GeoPoint closestPoint = findClosestIntersection(ray);
-        return closestPoint == null ? _scene.background : calcColor(closestPoint, ray,softShadow);
+        return closestPoint == null ? _scene.background : calcColor(closestPoint, ray, softShadow);
     }
 
 
@@ -261,14 +247,14 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * Constructing reflected ray
      *
-     * @param v
+     * @param v-vector v
      * @param n-normal
      * @param point    -p0
      * @return ray
      */
     private Ray ConstructingReflectedRay(Vector v, Vector n, Point3D point) {
 
-        Vector r = n.scale(2 * v.dotProduct(n)).subtract(v);//Vector r = v.subtract(n.scale(2 * v.dotProduct(n)));
+        Vector r = n.scale(2 * v.dotProduct(n)).subtract(v);
 
         return new Ray(point, r, n);
 
@@ -277,13 +263,12 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * Constructing refracted ray
      *
-     * @param v
+     * @param v-vector v
      * @param point-p0
      * @return ray
      */
     private Ray ConstructingRefractedRay(Vector v, Vector n, Point3D point) {
-//        Vector delta = n.scale(n.dotProduct(v) > 0 ? DELTA : -DELTA);
-//        Point3D _point = point.add(delta);
+
         return new Ray(point, v, n);
     }
 

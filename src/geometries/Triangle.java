@@ -1,4 +1,5 @@
 package geometries;
+
 import primitives.*;
 
 import java.util.ArrayList;
@@ -6,23 +7,28 @@ import java.util.List;
 
 import static primitives.Util.isZero;
 
+/**
+ * a class for triangle
+ */
 public class Triangle extends Polygon {
     /**
      * contractor, uses the father's contractor
-     * @param a
-     * @param b
-     * @param c
+     *
+     * @param a-point 1
+     * @param b-point 2
+     * @param c-point 3
      */
-    public Triangle(Point3D a,Point3D b,Point3D c){
-        super(a,b,c);
+    public Triangle(Point3D a, Point3D b, Point3D c) {
+        super(a, b, c);
     }
 
     /**
      * getter
-     * @param p
+     *
+     * @param p-point
      * @return
      */
-    public  Vector getNormal(Point3D p) {
+    public Vector getNormal(Point3D p) {
 //according to what that be displayed
 
         return super.getNormal(p);
@@ -43,8 +49,8 @@ public class Triangle extends Polygon {
             return null;
         else {
             List<GeoPoint> pointIntersection = super.plane.findGeoIntersections(ray);
-            if(pointIntersection!=null)
-              pointIntersection.get(0)._geometry=this;
+            if (pointIntersection != null)
+                pointIntersection.get(0)._geometry = this;
             else
                 return null;
             Vector v1 = super.vertices.get(0).subtract(ray.getP0());
@@ -55,8 +61,7 @@ public class Triangle extends Polygon {
             Vector n3 = (v3.crossProduct(v1)).normalize();
             if (((ray.getDir().dotProduct(n1)) > 0 && (ray.getDir().dotProduct(n2) > 0 && (ray.getDir().dotProduct(n3)) > 0) || (ray.getDir().dotProduct(n1)) < 0 && (ray.getDir().dotProduct(n2) < 0 && (ray.getDir().dotProduct(n3)) < 0))) {
                 return pointIntersection;
-            }
-            else
+            } else
                 return null;
         }
     }

@@ -7,7 +7,7 @@ import primitives.Vector;
 import static primitives.Util.isZero;
 
 /**
- *
+ * a class for camera
  */
 public class Camera {
     private final Point3D _p0;
@@ -20,10 +20,11 @@ public class Camera {
     private double _distance;
 
     /**
-     *constructor
-     * @param p0
-     * @param vTo
-     * @param vUp
+     * constructor
+     *
+     * @param p0-point   p0
+     * @param vTo-vector To
+     * @param vUp-vector up
      */
     public Camera(Point3D p0, Vector vTo, Vector vUp) {
         if (!isZero(vTo.dotProduct(vUp))) {
@@ -69,51 +70,50 @@ public class Camera {
     //setters using method chaining
 
     /**
-     *
-     * @param width
-     * @param height
+     * @param width-width
+     * @param height-high
      * @return the instance of Camera.
      */
-    public Camera setViewPlaneSize(double width, double height){
-        _width=width;
-        _height=height;
+    public Camera setViewPlaneSize(double width, double height) {
+        _width = width;
+        _height = height;
         return this;
     }
 
     /**
-     *
-     * @param distance
+     * @param distance-distance
      * @return the instance of Camera.
      */
-    public Camera setDistance(double distance){
-        _distance=distance;
+    public Camera setDistance(double distance) {
+        _distance = distance;
         return this;
     }
 
     /**
-     *The function creates a ray from the camera to the pixel
+     * The function creates a ray from the camera to the pixel
+     *
      * @param nX
      * @param nY
      * @param j
      * @param i
-     * @return
+     * @return -ray
      */
     //according to the presentation
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
         Point3D pc = _p0.add(_vTo.scale(_distance));
         double Ry = _height / nY;
         double Rx = _width / nX;
-        double xj = Rx * (j - (double)(nX - 1) / 2);
-        double yi = -Ry*(i - (double)(nY - 1) / 2);
+        double xj = Rx * (j - (double) (nX - 1) / 2);
+        double yi = -Ry * (i - (double) (nY - 1) / 2);
 
         if (isZero(xj) && isZero(yi)) {
             return new Ray(_p0, pc.subtract(_p0));
         } else if (isZero(xj)) {
-            return new Ray(_p0, pc.add(_vUp.scale(-Ry *  (i - (double)(nY - 1) / 2))).subtract(_p0));
+            return new Ray(_p0, pc.add(_vUp.scale(-Ry * (i - (double) (nY - 1) / 2))).subtract(_p0));
         } else if (isZero(yi)) {
-            return new Ray(_p0, pc.add(_vRight.scale(Rx *  (j - (double)(nX - 1) / 2))).subtract(_p0));
+            return new Ray(_p0, pc.add(_vRight.scale(Rx * (j - (double) (nX - 1) / 2))).subtract(_p0));
         } else {
-            return new Ray(_p0, pc.add(_vRight.scale(Rx *  (j - (double)(nX - 1) / 2))).add(_vUp.scale(-Ry *  (i - (double)(nY - 1) / 2))).subtract(_p0));
+            return new Ray(_p0, pc.add(_vRight.scale(Rx * (j - (double) (nX - 1) / 2))).add(_vUp.scale(-Ry * (i - (double) (nY - 1) / 2))).subtract(_p0));
 
         }
     }

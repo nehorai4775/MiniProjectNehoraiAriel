@@ -6,14 +6,14 @@ import scene.Scene;
 import java.util.*;
 
 /**
- *
- *
+ * a class for geometries
  */
 public class Geometries implements Intersectable {
     /**
      *
      */
-    List<Intersectable>   _list = new LinkedList<>();;
+    List<Intersectable> _list = new LinkedList<>();
+    ;
 
     /**
      * constructor
@@ -37,7 +37,7 @@ public class Geometries implements Intersectable {
     /**
      * add a shape to the list
      *
-     * @param geometries
+     * @param geometries-geometries
      */
     public void add(Intersectable... geometries) {
         Collections.addAll(_list, geometries);

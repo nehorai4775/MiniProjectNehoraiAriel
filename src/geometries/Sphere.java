@@ -1,4 +1,5 @@
 package geometries;
+
 import primitives.*;
 
 import java.util.ArrayList;
@@ -8,34 +9,36 @@ import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
- * TODO
+ * a class for sphere
  */
-public class Sphere extends Geometry{
+public class Sphere extends Geometry {
     private Point3D _center;
     private double _radius;
 
     /**
      * constructor
-     * @param radius
-     * @param center
+     *
+     * @param radius-radius
+     * @param center-center point
      */
-    public Sphere(double radius, Point3D center){
+    public Sphere(double radius, Point3D center) {
 
         _center = center;
-        if(radius==0)
+        if (radius == 0)
             throw new IllegalArgumentException();
         _radius = radius;
     }
 
     /**
      * getter
-     * @param p
-     * @return p
+     *
+     * @param p-point
+     * @return vector
      */
-    public Vector getNormal(Point3D p){
+    public Vector getNormal(Point3D p) {
         //according to what that be displayed
 
-        Vector v1=p.subtract(_center);
+        Vector v1 = p.subtract(_center);
         return v1.normalize();
     }
 
@@ -46,12 +49,22 @@ public class Sphere extends Geometry{
         Sphere sphere = (Sphere) o;
         return Double.compare(sphere._radius, _radius) == 0 && _center.equals(sphere._center);
     }
-//getters
+
+    /**
+     * getter
+     *
+     * @return center
+     */
     public Point3D getCenter() {
 
         return _center;
     }
 
+    /**
+     * getter
+     *
+     * @return radius
+     */
     public double getRadius() {
         return _radius;
     }
@@ -66,8 +79,7 @@ public class Sphere extends Geometry{
 
 
     /**
-     *
-     * @param ray
+     * @param ray-ray
      * @return Intersections points
      */
     @Override
@@ -78,7 +90,7 @@ public class Sphere extends Geometry{
         Point3D o = this._center;
         double radius = _radius;
 //in case that the head of the ray is the center of the sphere we add to the vector the radius
-        if (p0.equals(o) )
+        if (p0.equals(o))
             return List.of(new GeoPoint(this, ray.getPoint(radius)));
 
         Vector U = o.subtract(p0);
@@ -98,7 +110,7 @@ public class Sphere extends Geometry{
             Point3D P2 = ray.getPoint(t2);
 
 
-                return List.of(new GeoPoint(this, P1),new GeoPoint(this, P2));
+            return List.of(new GeoPoint(this, P1), new GeoPoint(this, P2));
 
 
         }
@@ -106,13 +118,13 @@ public class Sphere extends Geometry{
         if (t1 > 0) {
             Point3D P1 = ray.getPoint(t1);
 
-                return List.of(new GeoPoint(this, P1));
+            return List.of(new GeoPoint(this, P1));
         }
 
         if (t2 > 0) {
             Point3D P2 = ray.getPoint(t2);
 
-                return List.of(new GeoPoint(this, P2));
+            return List.of(new GeoPoint(this, P2));
         }
         return null;
 

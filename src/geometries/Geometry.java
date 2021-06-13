@@ -1,4 +1,5 @@
 package geometries;
+
 import primitives.*;
 
 import java.util.List;
@@ -6,14 +7,15 @@ import java.util.List;
 /**
  * abstract class
  */
-public abstract class Geometry implements Intersectable  {
+public abstract class Geometry implements Intersectable {
 
-    private Material Material=new Material();
+    private Material Material = new Material();
     protected Color _emission = Color.BLACK;
 
     /**
      * setter
-      * @param emission
+     *
+     * @param emission-color
      * @return this
      */
     public Geometry setEmission(Color emission) {
@@ -23,7 +25,8 @@ public abstract class Geometry implements Intersectable  {
 
     /**
      * setter
-     * @param material
+     *
+     * @param material-material
      * @return this
      */
     public Geometry setMaterial(primitives.Material material) {
@@ -33,6 +36,7 @@ public abstract class Geometry implements Intersectable  {
 
     /**
      * getter
+     *
      * @return material
      */
     public primitives.Material getMaterial() {
@@ -41,6 +45,7 @@ public abstract class Geometry implements Intersectable  {
 
     /**
      * getter
+     *
      * @return emission
      */
     public Color getEmission() {
