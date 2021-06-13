@@ -1,5 +1,6 @@
 package renderer;
 
+import elements.DirectionalLight;
 import elements.LightSource;
 import primitives.*;
 import primitives.Color;
@@ -139,9 +140,8 @@ public class RayTracerBasic extends RayTracerBase {
                 /**
                  * vectors around the light source
                  */
-                List<Vector> vectorsL = lightSource.getL2(point);
-                Color helpC = Color.BLACK;
-                for (Vector l : vectorsL) {
+                if (lightSource.getClass() == DirectionalLight.class) {
+                    Vector l = lightSource.getL(point);
                     double nl = alignZero(n.dotProduct(l));
                     if (nl * nv > 0) { // sign(nl) == sing(nv)
                         //  if (unshaded(lightSource, l, n, geoPoint)) {
@@ -149,18 +149,36 @@ public class RayTracerBasic extends RayTracerBase {
                         if (ktr * k > MIN_CALC_COLOR_K) {
 
                             Color lightIntensity = lightSource.getIntensity(geoPoint._point).scale(ktr);
-                            helpC = helpC.add(calcDiffusive(kd, l, n, lightIntensity),
+                            color = color.add(calcDiffusive(kd, l, n, lightIntensity),
                                     calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                         }
                     }
-                }
-                /**
-                 * We divide the color each time by the number of rays
-                 */
-                helpC = helpC.reduce(rays);
-                color = color.add(helpC);
-            }
+                } else {
 
+                    List<Vector> vectorsL = lightSource.getL2(point);
+                    Color helpC = Color.BLACK;
+
+
+                    for (Vector l : vectorsL) {
+                        double nl = alignZero(n.dotProduct(l));
+                        if (nl * nv > 0) { // sign(nl) == sing(nv)
+                            //  if (unshaded(lightSource, l, n, geoPoint)) {
+                            double ktr = transparency(lightSource, l, n, geoPoint);
+                            if (ktr * k > MIN_CALC_COLOR_K) {
+
+                                Color lightIntensity = lightSource.getIntensity(geoPoint._point).scale(ktr);
+                                helpC = helpC.add(calcDiffusive(kd, l, n, lightIntensity),
+                                        calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                            }
+                        }
+                    }
+                    /**
+                     * We divide the color each time by the number of rays
+                     */
+                    helpC = helpC.reduce(rays);
+                    color = color.add(helpC);
+                }
+            }
         }
 
         return color;

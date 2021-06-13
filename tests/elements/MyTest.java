@@ -31,15 +31,26 @@ public class MyTest {
                         .setMaterial(new Material().setKd(0.8).setKs(0.2).setShininess(300).setKt(0.5)),
 
 
-                new Sphere(0.5,new Point3D(0,-1,0.5))
+                new Sphere(0.25,new Point3D(0,-1,0.5))
                         .setEmission(new Color(0,200,0)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.5)),
 
-                new Sphere(0.5,new Point3D(0,1,0.5))
-                        .setEmission(new Color(200,0,0)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.3))
+                new Sphere(0.25,new Point3D(0.4,0.53,0.37))
+                        .setEmission(new Color(200,0,0)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.3)),
+
+        new Sphere(0.25,new Point3D(0.4,-0.53,0.37))
+                .setEmission(new Color(200,200,0)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.3)),
+
+
+        new Sphere(0.25,new Point3D(0,1,0.5))
+                .setEmission(new Color(200,0,200)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(40).setKr(0.3))
+
 
 
                 );
-        scene.lights.add(new PointLight(new Color(255,255,255),new Point3D(3,3,3),1.4,0.005,0.0005));
+        scene.lights.add(new PointLight(new Color(255,255,255),new Point3D(-1,-2,2),1.4,0.005,0.0005));
+        scene.lights.add(new DirectionalLight(new Color(200,0,0),new Vector(1,4,1)));
+        scene.lights.add(new SpotLight(new Color(500,500,0), new Point3D(-1,2,2), new Vector(1,-10,0)) //
+               .setKl(0.00001).setKq(0.00000001));
 
         Render render = new Render() //
                 .setImageWriter(new ImageWriter("MyTests", 500, 500)) //
