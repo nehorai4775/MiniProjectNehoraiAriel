@@ -111,6 +111,15 @@ public class Plane extends Geometry {
             return null;
 
     }
+    public  boolean inPlane(Point3D p){
+        if(p.equals(_q0)){
+            return true;
+        }
+        if(isZero(_normal.dotProduct(p.subtract(_q0)))){
+            return true;
+        }
+        return false;
+    }
 
 
 }

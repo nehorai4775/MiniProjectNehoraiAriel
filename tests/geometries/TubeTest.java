@@ -19,7 +19,7 @@ class TubeTest {
         // ============ Equivalence Partitions Tests ==============
         try {
             //constructing a correct Tube
-            new Tube(new Ray(new Point3D(1,2,3),new Vector(2,5,7)),5);
+            new Tube(5, new Ray(new Point3D(1,2,3),new Vector(2,5,7)));
 
         }
         catch (IllegalArgumentException e) {
@@ -28,14 +28,14 @@ class TubeTest {
         // =============== Boundary Values Tests ==================
         try {
             //when the vector is zero
-            new Tube(new Ray(new Point3D(1,2,3),new Vector(0,0,0)),5);
+            new Tube(5, new Ray(new Point3D(1,2,3),new Vector(0,0,0)));
             fail("Failed constructing when the vector is zero");
         }
         catch (IllegalArgumentException e) {
         }
         try {
             //when the radius is zero
-            new Tube(new Ray(new Point3D(1,2,3),new Vector(2,5,7)),0);
+            new Tube(0, new Ray(new Point3D(1,2,3),new Vector(2,5,7)));
             fail("Failed constructing when the radius is zero");
         }
         catch (IllegalArgumentException e) {
@@ -45,7 +45,7 @@ class TubeTest {
     void testGetNormal() {
         // ============ Equivalence Partitions Tests ==============
         //test the get normal
-        Tube tu= new Tube(new Ray(Point3D.ZERO, new Vector(0,0,1)),1);
+        Tube tu= new Tube(1, new Ray(Point3D.ZERO, new Vector(0,0,1)));
         double sqrt3 = Math.sqrt(1d / 3);
 
         assertEquals(new Vector(0, 1, 0), tu.getNormal(new Point3D(0, 1, 1d/2)),"Bad normal to Tube");
