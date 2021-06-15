@@ -15,6 +15,8 @@ public class Tube extends Geometry {
     final Ray _axisRay;
 
     public Tube(double radius, Ray axisRay) {
+        if(radius==0)
+            throw new IllegalArgumentException();
         _radius = radius;
         _axisRay = axisRay;
     }
