@@ -80,19 +80,29 @@ public class PointLight extends Light implements LightSource {
     /**
      * setter
      *
-     * @param kc kl,kq -Discount coefficients
-     * @return this
+     * @param kc -Discount coefficients
+     * @return Point light by model builder
      */
     public PointLight setKc(double kc) {
         _kc = kc;
         return this;
     }
 
+    /**
+     * setter
+     * @param kl-Discount coefficients
+     * @return Point light by model builder
+     */
     public PointLight setKl(double kl) {
         _kl = kl;
         return this;
     }
 
+    /**
+     * setter
+     * @param kq-Discount coefficients
+     * @return Point light by model builder
+     */
     public PointLight setKq(double kq) {
         _kq = kq;
         return this;
@@ -201,6 +211,8 @@ public class PointLight extends Light implements LightSource {
      */
     public double randomDoubleBetweenTwoNumbers(double min, double max) {
         double rand = min + (max - min) * new Random().nextDouble();
+        //We want it to not include these numbers
+
         if (rand == min || rand == max) {
             return randomDoubleBetweenTwoNumbers(min, max);
         }

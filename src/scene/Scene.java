@@ -39,7 +39,7 @@ public class Scene {
      * setter
      *
      * @param background- color of background
-     * @return this
+     * @return scene by model builder
      */
     public Scene setBackground(Color background) {
         this.background = background;
@@ -50,7 +50,7 @@ public class Scene {
      * setter
      *
      * @param ambientLight-ambient light
-     * @return this
+     * @return scene by model builder
      */
     public Scene setAmbientLight(AmbientLight ambientLight) {
         this.ambientLight = ambientLight;
@@ -61,7 +61,7 @@ public class Scene {
      * setter
      *
      * @param geometries -geometries
-     * @return this
+     * @return scene by model builder
      */
     public Scene setGeometries(Geometries geometries) {
         this.geometries = geometries;

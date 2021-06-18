@@ -21,18 +21,10 @@ public class Geometries implements Intersectable {
      * @param geometries list
      */
     public Geometries(Intersectable... geometries) {
-//        _list = new LinkedList<>();
         Collections.addAll(_list, geometries);
     }
 
-//    /**
-//     * default constructor, empty list
-//     */
-//    public Geometries() {
-////empty list
-//        //TODO
-//        _list = new LinkedList<>();
-//    }
+
 
     /**
      * add a shape to the list
@@ -73,6 +65,7 @@ public class Geometries implements Intersectable {
 
         List<GeoPoint> intersections = new ArrayList<GeoPoint>();
         for (int i = 0; i < _list.size(); ++i) {
+            //we put the geo intersection in a list
             List<GeoPoint> geoIntersections = _list.get(i).findGeoIntersections(ray);
             if (geoIntersections != null)
                 intersections.addAll(geoIntersections);

@@ -92,15 +92,13 @@ public class Sphere extends Geometry {
 //in case that the head of the ray is the center of the sphere we add to the vector the radius
         if (p0.equals(o))
             return List.of(new GeoPoint(this, ray.getPoint(radius)));
-
+//vector u is the vector from the center of the sphere to the start of the plane
         Vector U = o.subtract(p0);
         double tm = v.dotProduct(U);
         double d = Math.sqrt(U.lengthSquared() - tm * tm);
 
         if (alignZero(d - radius) >= 0)
             return null;
-
-
         double th = Math.sqrt(radius * radius - d * d);
         double t1 = alignZero(tm - th);
         double t2 = alignZero(tm + th);
@@ -109,20 +107,18 @@ public class Sphere extends Geometry {
             Point3D P1 = ray.getPoint(t1);
             Point3D P2 = ray.getPoint(t2);
 
-
+//if there is intersection we return the two point intersection
             return List.of(new GeoPoint(this, P1), new GeoPoint(this, P2));
-
-
         }
-
         if (t1 > 0) {
             Point3D P1 = ray.getPoint(t1);
-
+//if there is only one intersection we return one point
             return List.of(new GeoPoint(this, P1));
         }
 
         if (t2 > 0) {
             Point3D P2 = ray.getPoint(t2);
+//if there is only one intersection we return one point
 
             return List.of(new GeoPoint(this, P2));
         }

@@ -104,7 +104,10 @@ public class Material {
         return _nshininess;
     }
 
-
+    /**
+     * getter
+     * @return kt
+     */
     public double getKt() {
         return _kt;
     }

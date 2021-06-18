@@ -96,12 +96,15 @@ public class Plane extends Geometry {
 
     @Override
     public List<GeoPoint> findGeoIntersections(Ray ray) {
+        //if q0==ray.p0
         if (isZero(ray.getP0().getX().getCoord() - _q0.getX().getCoord()) && isZero(ray.getP0().getY().getCoord() - _q0.getY().getCoord()) && isZero(ray.getP0().getZ().getCoord() - _q0.getZ().getCoord()))
             return null;
+        //if they don't orthogonal
         if (_normal.dotProduct(ray.getDir()) != 0) {
             double t = alignZero(_normal.dotProduct(_q0.subtract(ray.getP0())) / _normal.dotProduct(ray.getDir()));
             if (t > 0) {
                 List<GeoPoint> points = new ArrayList<GeoPoint>();
+                //we create a new point and add her to the points
                 GeoPoint temp = new GeoPoint(this, ray.getPoint(t));
                 points.add(temp);
                 return points;
@@ -111,7 +114,14 @@ public class Plane extends Geometry {
             return null;
 
     }
+
+    /**
+     * check if the point in the plane
+     * @param p-point
+     * @return if the point on the plane
+     */
     public  boolean inPlane(Point3D p){
+        //if the point in the plane
         if(p.equals(_q0)){
             return true;
         }

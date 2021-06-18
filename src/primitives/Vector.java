@@ -21,7 +21,7 @@ public class Vector {
     /**
      * contractor
      *
-     * @param _head
+     * @param _head -head point of the vector
      */
     public Vector(Point3D _head) {
         if (_head.equals(Point3D.ZERO))
@@ -61,7 +61,7 @@ public class Vector {
     /**
      * add two vectors
      *
-     * @param v0-vector
+     * @param v0-vector to add
      * @return addVector (the result)
      */
 //a function that adds two vectors
@@ -73,7 +73,7 @@ public class Vector {
     /**
      * subtract between to vectors
      *
-     * @param v0
+     * @param v0-vector to suntract
      * @return subtractVector(the result)
      */
     //a function that subtracts two vectors

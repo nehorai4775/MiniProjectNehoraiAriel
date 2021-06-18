@@ -92,20 +92,22 @@ public class Camera {
     /**
      * The function creates a ray from the camera to the pixel
      *
-     * @param nX
-     * @param nY
-     * @param j
-     * @param i
-     * @return -ray
+     * @param nX-number of column
+     * @param nY-number of row
+     * @param j-column of the pixel
+     * @param i-row of the pixel
+     * @return -ray from the camera
      */
-    //according to the presentation
     public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
+        //point on the view plane
         Point3D pc = _p0.add(_vTo.scale(_distance));
         double Ry = _height / nY;
         double Rx = _width / nX;
+        //xj is the x from the pc
         double xj = Rx * (j - (double) (nX - 1) / 2);
+        //yi- is the y from the pc
         double yi = -Ry * (i - (double) (nY - 1) / 2);
-
+//return ray from the camera to thr view plane
         if (isZero(xj) && isZero(yi)) {
             return new Ray(_p0, pc.subtract(_p0));
         } else if (isZero(xj)) {

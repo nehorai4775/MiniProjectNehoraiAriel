@@ -37,6 +37,7 @@ public interface Intersectable {
 
     default List<Point3D> findIntersections(Ray ray) {
         var geoList = findGeoIntersections(ray);
+        //we check if there is intersection if yes we return list of the points
         return geoList == null ? null
                 : geoList.stream().map(gp -> gp._point).collect(Collectors.toList());
     }

@@ -43,7 +43,9 @@ public class RayTracerBasic extends RayTracerBase {
      */
     public Color calcColor(GeoPoint point, Ray ray, int level, double k, boolean softShadow) {
         Color color = point._geometry.getEmission();
+        //we add to the color the local effects
         color = color.add(calcLocalEffects(point, ray, k, softShadow));
+        //if we in level 1 we return color if not we add the global effect
         return 1 == level ? color : color.add(calcGlobalEffects(point, ray.getDir(), level, k, softShadow));
     }
 
@@ -209,9 +211,11 @@ public class RayTracerBasic extends RayTracerBase {
      * @return geo point
      */
     private GeoPoint findClosestIntersection(Ray ray) {
+        //we find the intgersection
         List<GeoPoint> intersections = _scene.geometries.findGeoIntersections(ray);
         if (intersections.isEmpty() || intersections == null)
             return null;
+        //if it is not empty we return the closest point
         return ray.findGeoClosestPoint(intersections);
     }
 
@@ -223,21 +227,27 @@ public class RayTracerBasic extends RayTracerBase {
      */
     @Override
     public Color traceRay(Ray ray, boolean softShadow) {
-
+//we calculate the closet point to the ray
         GeoPoint closestPoint = findClosestIntersection(ray);
+        //if it is null er return the color of the background else we calc the color
         return closestPoint == null ? _scene.background : calcColor(closestPoint, ray, softShadow);
     }
 
 
     private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
         Vector lightDirection = l.scale(-1); // from point to light source
-        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : -DELTA);
-        Point3D point = geopoint._point.add(delta);
-        Ray lightRay = new Ray(point, lightDirection);
+//        //we check if we should scale in delta or minus delta
+//        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : -DELTA);
+//        //we add the delta
+//        Point3D point = geopoint._point.add(delta);
+        Ray lightRay = new Ray(geopoint._point, lightDirection,n);
+        // we find the intersection
         List<GeoPoint> intersections = _scene.geometries.findGeoIntersections(lightRay);
+        //if there is not have intersection we return that there isn't have shaded
         if (intersections == null) return true;
         double lightDistance = light.getDistance(geopoint._point);
         for (GeoPoint gp : intersections) {
+            //if we after the intersection and there isn't have transperency er return that there is shaded
             if (alignZero(gp._point.distance(geopoint._point) - lightDistance) <= 0 && gp._geometry.getMaterial()._kt == 0)
                 return false;
         }
@@ -275,14 +285,20 @@ public class RayTracerBasic extends RayTracerBase {
 
     private double transparency(LightSource ls, Vector l, Vector n, GeoPoint geoPoint) {
         Vector lightDirection = l.scale(-1); // from point to light source
-        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : -DELTA);
-        Point3D point = geoPoint._point.add(delta);
-        Ray lightRay = new Ray(point, lightDirection);
+//        //we check if we should scale in delta or minus delta
+//        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : -DELTA);
+//        Point3D point = geoPoint._point.add(delta);
+
+        //the ray from the geo point
+        Ray lightRay = new Ray(geoPoint._point, lightDirection,n);
+        //we find the intersections
         List<GeoPoint> intersections = _scene.geometries.findGeoIntersections(lightRay);
         if (intersections == null) return 1.0;
         double ktr = 1.0;
+        //we find the distance
         double lightDistance = ls.getDistance(geoPoint._point);
         for (GeoPoint gp : intersections) {
+            //if the point after the intersection
             if (alignZero(gp._point.distance(geoPoint._point) - lightDistance) <= 0) {
                 ktr *= gp._geometry.getMaterial().getKt();
                 if (ktr < MIN_CALC_COLOR_K) return 0.0;

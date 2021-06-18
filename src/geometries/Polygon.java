@@ -99,6 +99,7 @@ public class Polygon extends Geometry {
             List<GeoPoint> pointIntersection = plane.findGeoIntersections(ray);//we find the intersections with the plane
             if (pointIntersection != null)
                 pointIntersection.get(0)._geometry = this;
+            //we check if the point intersection on the polygon
             for (int i = 0; i < vertices.size() - 2; ++i) {
                 Vector v1 = vertices.get(i).subtract(ray.getP0());
                 Vector v2 = vertices.get(i + 1).subtract(ray.getP0());
