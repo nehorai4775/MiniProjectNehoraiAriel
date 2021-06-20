@@ -270,7 +270,7 @@ public class MyTest {
             ImageWriter imageWriter = new ImageWriter("myTestWithThreads", 500, 500);
             Render render = new Render().setImageWriter(imageWriter).setRayTracer(new RayTracerBasic(scene)) //
                     .setMultithreading(3).setDebugPrint().setCamera(camera);
-            render.renderImage(true);
+            render.renderImage2(true);
           //  render.printGrid(50, new Color(java.awt.Color.yellow));
             render.writeToImage();
 

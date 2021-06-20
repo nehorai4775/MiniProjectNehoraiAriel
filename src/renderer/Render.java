@@ -140,7 +140,11 @@ public class Render {
             _maxCols = maxCols;
             _pixels = maxRows * maxCols;
             _nextCounter = _pixels / 100;
-            if (Render.this._print) System.out.println(_percents);
+            if (Render.this._print){
+                System.out.print(_percents);
+                System.out.println('%');
+
+            }
         }
 
         /**
@@ -199,10 +203,18 @@ public class Render {
             //we calculate the percent that finish
             int percents = nextP(target);
             if (percents > 0)
-                if (Render.this._print) System.out.println( _percents);//we print the percent
+                if (Render.this._print){
+                    System.out.print( _percents);//we print the percent
+                    System.out.println('%');
+
+                }
             if (percents >= 0)
                 return true;
-            if (Render.this._print) System.out.println(100);
+            if (Render.this._print){
+                System.out.print(100);
+                System.out.println('%');
+
+            }
             return false;
         }
     }
@@ -239,7 +251,11 @@ public class Render {
 
         // Wait for all threads to finish
         for (Thread thread : threads) try { thread.join(); } catch (Exception e) {}
-        if (_print) System.out.println(100);
+        if (_print){
+            System.out.print(100);
+            System.out.println('%');
+
+        }
     }
 
     /**

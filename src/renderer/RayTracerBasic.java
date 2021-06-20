@@ -38,7 +38,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @param point   -geo point
      * @param ray-ray
      * @param level   -level
-     * @param k
+     * @param k-A coefficient that weakens the level of transparency or reflection
      * @return color
      */
     public Color calcColor(GeoPoint point, Ray ray, int level, double k, boolean softShadow) {
@@ -69,18 +69,18 @@ public class RayTracerBasic extends RayTracerBase {
      * @param gp-geo point
      * @param v      -vector v
      * @param level  -level
-     * @param k
+     * @param k- A coefficient that weakens the level of transparency or reflection
      * @return color
      */
     private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, double k, boolean softShadow) {
         Color color = Color.BLACK;
         Vector n = gp._geometry.getNormal(gp._point);
         Material material = gp._geometry.getMaterial();
-
+//if it is passing the k minimal value
         double kkr = k * material._kr;
         if (kkr > MIN_CALC_COLOR_K)
             color = calcGlobalEffect(ConstructingReflectedRay(v, n, gp._point), level, material._kr, kkr, softShadow);
-
+//if it is passing the k minimal value
         double kkt = k * material._kt;
         if (kkt > MIN_CALC_COLOR_K)
             color = color.add(
@@ -95,12 +95,13 @@ public class RayTracerBasic extends RayTracerBase {
      *
      * @param ray-ray
      * @param level   -level
-     * @param kx
-     * @param kkx
+     * @param kx-Coefficient of variable effect
+     * @param kkx-The coefficient of the variable effect is double the coefficient of the recursion
      * @return color
      */
     private Color calcGlobalEffect(Ray ray, int level, double kx, double kkx, boolean softShadow) {
         GeoPoint gp = findClosestIntersection(ray);
+        // if the intersection is null you return the background color and else you calc the intersection color of the global effect
         return (gp == null ? _scene.background : calcColor(gp, ray, level - 1, kkx, softShadow)
                 .scale(kx));
     }
@@ -177,10 +178,10 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * calculate the diffusive
      *
-     * @param kd
+     * @param kd- a coefficient of diffusive
      * @param l-vector l
      * @param n-vector normal
-     * @param LI
+     * @param LI- light intensity
      * @return The color calculated
      */
     private Color calcDiffusive(double kd, Vector l, Vector n, Color LI) {
@@ -191,12 +192,12 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * calculate the specular
      *
-     * @param ks
+     * @param ks- coefficient of specular effect
      * @param l-       vector l
      * @param n-vector n
      * @param v-vector v
-     * @param nShin
-     * @param LI
+     * @param nShin- the value of shininess
+     * @param LI-light intensity
      * @return The color calculated
      */
     private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShin, Color LI) {
